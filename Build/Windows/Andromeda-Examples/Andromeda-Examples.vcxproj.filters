@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\2D">
+      <UniqueIdentifier>{48a791b0-3580-45fb-a049-a28b7785182d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Basic">
+      <UniqueIdentifier>{636d73b0-2ebc-41d7-865f-64af851c965b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Bullet">
+      <UniqueIdentifier>{bec1d321-13f0-42b4-92a7-b7697b206a47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FreeTypeTests">
+      <UniqueIdentifier>{8ce4bd97-d57b-4486-9a09-7f4c2031f52e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{87821a54-6c0f-4f56-b79c-c3213684db7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lightening">
+      <UniqueIdentifier>{9da2f929-37e2-46a6-afb0-f7af4176a880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{b0e46d95-2202-4173-8015-b7d3d62e85c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Other">
+      <UniqueIdentifier>{8a0e7bee-8beb-453b-bd74-d34c1962d35e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Examples\2D\Test2D1.cpp">
+      <Filter>Source Files\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Basic\Test1.cpp">
+      <Filter>Source Files\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Basic\Test2.cpp">
+      <Filter>Source Files\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Basic\Test3.cpp">
+      <Filter>Source Files\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Basic\Test4.cpp">
+      <Filter>Source Files\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Basic\Test5.cpp">
+      <Filter>Source Files\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Basic\Test6.cpp">
+      <Filter>Source Files\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Basic\TestCam3d.cpp">
+      <Filter>Source Files\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Basic\TestSprite.cpp">
+      <Filter>Source Files\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Basic\TestToTexture.cpp">
+      <Filter>Source Files\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Basic\VitaTest.cpp">
+      <Filter>Source Files\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Bullet\BasicCar.cpp">
+      <Filter>Source Files\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Bullet\TestBullet1.cpp">
+      <Filter>Source Files\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Bullet\TestBullet2.cpp">
+      <Filter>Source Files\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Bullet\TestBullet3.cpp">
+      <Filter>Source Files\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Bullet\TestBullet4.cpp">
+      <Filter>Source Files\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\FreeTypeTests\TestFreeTypeAtlas.cpp">
+      <Filter>Source Files\FreeTypeTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\FreeTypeTests\TestFreeTypeFont.cpp">
+      <Filter>Source Files\FreeTypeTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Input\TouchTest.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Lightening\TestLight1.cpp">
+      <Filter>Source Files\Lightening</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Lightening\TestLight2.cpp">
+      <Filter>Source Files\Lightening</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Lightening\TestLight3.cpp">
+      <Filter>Source Files\Lightening</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Lightening\TestLight4.cpp">
+      <Filter>Source Files\Lightening</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Models\TestMd5Model.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Models\TestObjKart.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Models\TestObjModel.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Other\FontTest.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Other\ObjModelTest.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Other\ShaderTest.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Other\TextureTest.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Other\VertexArrayTest.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Andromeda.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\ExampleGameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\InputHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\TestHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Examples\2D\Test2D1.h">
+      <Filter>Source Files\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Basic\Test1.h">
+      <Filter>Source Files\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Basic\Test2.h">
+      <Filter>Source Files\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Basic\Test3.h">
+      <Filter>Source Files\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Basic\Test4.h">
+      <Filter>Source Files\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Basic\Test5.h">
+      <Filter>Source Files\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Basic\Test6.h">
+      <Filter>Source Files\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Basic\TestCam3d.h">
+      <Filter>Source Files\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Basic\TestSprite.h">
+      <Filter>Source Files\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Basic\TestToTexture.h">
+      <Filter>Source Files\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Basic\VitaTest.h">
+      <Filter>Source Files\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Bullet\BasicCar.h">
+      <Filter>Source Files\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Bullet\TestBullet1.h">
+      <Filter>Source Files\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Bullet\TestBullet2.h">
+      <Filter>Source Files\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Bullet\TestBullet3.h">
+      <Filter>Source Files\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Bullet\TestBullet4.h">
+      <Filter>Source Files\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\FreeTypeTests\TestFreeTypeAtlas.h">
+      <Filter>Source Files\FreeTypeTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\FreeTypeTests\TestFreeTypeFont.h">
+      <Filter>Source Files\FreeTypeTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Input\TouchTest.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Lightening\TestLight1.h">
+      <Filter>Source Files\Lightening</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Lightening\TestLight2.h">
+      <Filter>Source Files\Lightening</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Lightening\TestLight3.h">
+      <Filter>Source Files\Lightening</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Lightening\TestLight4.h">
+      <Filter>Source Files\Lightening</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Models\TestMd5Model.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Models\TestObjKart.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Models\TestObjModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Other\FontTest.h">
+      <Filter>Source Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Other\ObjModelTest.h">
+      <Filter>Source Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Other\ShaderTest.h">
+      <Filter>Source Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Other\TextureTest.h">
+      <Filter>Source Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Other\VertexArrayTest.h">
+      <Filter>Source Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\ExampleGameManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\InputHelper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\TestHelper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
