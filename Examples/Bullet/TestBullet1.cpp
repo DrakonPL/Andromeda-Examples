@@ -13,7 +13,7 @@ void TestBullet1::Init()
 	_textureManager = TextureManager::Instance();
 
 	//load shader
-	_shader = _shaderManager->LoadFromFile("simple", "Assets/Shaders/vertex_color_texture_transform_3d", "Assets/Shaders/vertex_color_texture", TextureColor);
+	_shader = _shaderManager->LoadFromFile("simple3", "Assets/Shaders/vertex_color_texture_transform_3d", "Assets/Shaders/vertex_color_texture", TextureColor);
 
 	//textures
 	_cubeTexture = _textureManager->LoadFromFile("Assets/Images/container.png", Andromeda::Graphics::TextureFilerType::LinearFilter, Andromeda::Graphics::TextureColorType::Texture_RGBA, Andromeda::Graphics::TextureWrapType::Repeat);

@@ -40,7 +40,7 @@ void TestLight4::Init()
 	_lamp->SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
 
 	//load cube texture
-	_cubeTexture = _textureManager->LoadFromFile("Assets/Images/wood.png");
+	_cubeTexture = _textureManager->LoadFromFile("Assets/Images/wood.png", Andromeda::Graphics::TextureFilerType::LinearFilter, Andromeda::Graphics::TextureColorType::Texture_RGBA, Andromeda::Graphics::TextureWrapType::Repeat, 7);
 
 	//cam
 	_cam = new Camera3d(glm::vec3(0.0f, 0.0f, 4.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);

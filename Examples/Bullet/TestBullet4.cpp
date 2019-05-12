@@ -71,6 +71,8 @@ void TestBullet4::Init()
 
 	initState = 0;
 
+	physDynamicsWorld = nullptr;
+
 	_timer = new Timer();
 }
 
@@ -218,6 +220,9 @@ glm::mat4 TestBullet4::btScalar2glmMat4(btScalar* matrix)
 
 void TestBullet4::CleanUp()
 {
+
+	initState = 0;
+
 	delete _carModel;
 	delete _wheelModel;
 
