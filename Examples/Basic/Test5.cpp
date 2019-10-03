@@ -136,7 +136,7 @@ void Test5::Draw(GameManager* manager)
 		scaleFactor = 0.01f;
 	}
 
-	glm::mat4 trans;
+	glm::mat4 trans{ 1.0 };
 	trans = glm::rotate(trans, angle, glm::vec3(0.0, 0.0, 1.0));
 	trans = glm::scale(trans, glm::vec3(scale, scale, scale));
 

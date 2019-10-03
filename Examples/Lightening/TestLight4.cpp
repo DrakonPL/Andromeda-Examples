@@ -1,7 +1,3 @@
-
-
-//diffuse light
-
 #include "TestLight4.h"
 
 #include <glm/gtc/matrix_inverse.hpp>

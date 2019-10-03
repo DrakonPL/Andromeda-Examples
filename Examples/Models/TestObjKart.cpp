@@ -199,9 +199,9 @@ void TestObjKart::Draw(GameManager* manager)
 
 	//draw car
 	{
-		glm::mat4 model;
-		glm::mat4 view;
-		glm::mat4 mvp;
+		glm::mat4 model{ 1.0 };;
+		glm::mat4 view{ 1.0 };;
+		glm::mat4 mvp{ 1.0 };;
 
 		//get view matrix from camera
 		view = _cam->GetViewMatrix();
@@ -216,9 +216,9 @@ void TestObjKart::Draw(GameManager* manager)
 	//draw wheels
 	for (int i = 0; i < _wheelPositions.size(); i++)
 	{
-		glm::mat4 model;
-		glm::mat4 view;
-		glm::mat4 mvp;
+		glm::mat4 model{ 1.0 };;
+		glm::mat4 view{ 1.0 };;
+		glm::mat4 mvp{ 1.0 };;
 
 		model = glm::translate(model, _wheelPositions[i]);
 

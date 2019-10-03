@@ -1,6 +1,5 @@
-
-
 #include "BasicCar.h"
+#include <Andromeda/Utils/Logger.h>
 
 BasicCar::BasicCar()
 {
@@ -36,6 +35,7 @@ BasicCar::~BasicCar()
 
 bool BasicCar::Create(ModelObj* chasis, ModelObj* wheel, Shader* shader, btDynamicsWorld *dynamicsWorld, btVector3 &position, btScalar mass)
 {
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create start");
 
 	mass = mass / 3.5f;
 
@@ -49,9 +49,13 @@ bool BasicCar::Create(ModelObj* chasis, ModelObj* wheel, Shader* shader, btDynam
 	//dynamic world
 	mDynamicsWorld = dynamicsWorld;
 
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 1");
+
 	// create a chassis shape that is proportfion to the size	
 	mChassisShape = new btBoxShape(btVector3(0.9045f / 2.5f, 0.5335f / 2.5f, 1.5355f / 2.5f));
 	mSize = 0.7f / 2.5f;
+
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 2");
 
 	mCompoundShape = new btCompoundShape();
 	//mWheelWidth = 0.4f * mSize;
@@ -61,7 +65,11 @@ bool BasicCar::Create(ModelObj* chasis, ModelObj* wheel, Shader* shader, btDynam
 	localTrans.setIdentity();
 	localTrans.setOrigin(btVector3(0.0f, 0.5f / 1.0f, 0.0f));
 
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 3");
+
 	mCompoundShape->addChildShape(localTrans, mChassisShape);
+
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 4");
 
 	localTrans.setOrigin(position);
 	mChassisRigidBody = CreateRigidBody(mass, localTrans, mCompoundShape);
@@ -70,7 +78,11 @@ bool BasicCar::Create(ModelObj* chasis, ModelObj* wheel, Shader* shader, btDynam
 	mChassisRigidBody->setAngularVelocity(btVector3(0, 0, 0));
 	mDynamicsWorld->addRigidBody(mChassisRigidBody);
 
-	mDynamicsWorld->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(mChassisRigidBody->getBroadphaseHandle(), mDynamicsWorld->getDispatcher());
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 5");
+
+	//mDynamicsWorld->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(mChassisRigidBody->getBroadphaseHandle(), mDynamicsWorld->getDispatcher());
+
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 6");
 
 	int rightIndex = 0;
 	int upIndex = 1;
@@ -79,13 +91,19 @@ bool BasicCar::Create(ModelObj* chasis, ModelObj* wheel, Shader* shader, btDynam
 	btVector3 wheelAxleCS(-1, 0, 0);
 	btScalar suspensionRestLength(0.5 / 2.5f);
 
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 7");
+
 	mVehicleRaycaster = new btDefaultVehicleRaycaster(mDynamicsWorld);
 	mRaycastVehicle = new btRaycastVehicle(mVehicleTuning, mChassisRigidBody, mVehicleRaycaster);
+
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 8");
 
 	// Never deactivate the vehicle
 	mChassisRigidBody->setActivationState(DISABLE_DEACTIVATION);
 
 	mDynamicsWorld->addVehicle(mRaycastVehicle);
+
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 9");
 
 	float connectionHeight = 0.135f / 2.75f;
 
@@ -100,6 +118,10 @@ bool BasicCar::Create(ModelObj* chasis, ModelObj* wheel, Shader* shader, btDynam
 
 	//_wheelPositions.push_back(glm::vec3(0.33f, -0.17f, 0.335f));
 	//_wheelPositions.push_back(glm::vec3(0.33f, -0.17f, -0.26f));
+	//
+	//
+
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 10");
 
 	//btVector3 connectionPointCS0(mSize + (.5f*mWheelWidth), connectionHeight, 2.f*mSize - mWheelRadius);
 	btVector3 connectionPointCS0(0.33f, connectionHeight, 0.335f);
@@ -118,6 +140,8 @@ bool BasicCar::Create(ModelObj* chasis, ModelObj* wheel, Shader* shader, btDynam
 	connectionPointCS0 = btVector3(0.33f, connectionHeight, -0.26f);
 	mRaycastVehicle->addWheel(connectionPointCS0, wheelDirectionCS0, wheelAxleCS, suspensionRestLength, mWheelRadius, mVehicleTuning, isFrontWheel);
 
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create 11");
+
 	for (int i = 0; i<mRaycastVehicle->getNumWheels(); i++)
 	{
 		btWheelInfo& wheel = mRaycastVehicle->getWheelInfo(i);
@@ -127,6 +151,8 @@ bool BasicCar::Create(ModelObj* chasis, ModelObj* wheel, Shader* shader, btDynam
 		wheel.m_frictionSlip = mWheelFriction;
 		wheel.m_rollInfluence = mRollInfluence;
 	}
+
+    Andromeda::Utils::Logger::Instance()->Log("BasicCar::Create end");
 
 	return true;
 }
@@ -268,14 +294,14 @@ void BasicCar::Update(KeyboardDevice* keyboard, GamepadDevice* gamepad, float el
 
 void BasicCar::Render(glm::mat4 &camView, glm::mat4 &projection)
 {
-	btVector3	worldBoundsMin, worldBoundsMax;
-	mDynamicsWorld->getBroadphase()->getBroadphaseAabb(worldBoundsMin, worldBoundsMax);
+	//btVector3	worldBoundsMin, worldBoundsMax;
+	//mDynamicsWorld->getBroadphase()->getBroadphaseAabb(worldBoundsMin, worldBoundsMax);
 
 	//draw chasis
 	{
-		glm::mat4 model;
+		glm::mat4 model{ 1.0 };;
 		//glm::mat4 view;
-		glm::mat4 mvp;
+		glm::mat4 mvp{ 1.0 };;
 
 		//get box matrix from bullet object
 		float cubeMatrix[16];
@@ -305,8 +331,8 @@ void BasicCar::Render(glm::mat4 &camView, glm::mat4 &projection)
 		btTransform trn = mRaycastVehicle->getWheelTransformWS(i);
 		trn.getOpenGLMatrix((btScalar*)&cubeMatrix);
 
-		glm::mat4 model;
-		glm::mat4 mvp;
+		glm::mat4 model{ 1.0 };;
+		glm::mat4 mvp{ 1.0 };;
 
 		model = btScalar2glmMat4(cubeMatrix);
 

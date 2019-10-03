@@ -321,9 +321,9 @@ void TestCam3d::Draw(GameManager* manager)
 
   	for (size_t i = 0; i < _cubePositions.size();i++)
 	{
-		glm::mat4 model;
-		glm::mat4 view;
-		glm::mat4 mvp;
+		glm::mat4 model{ 1.0 };;
+		glm::mat4 view{ 1.0 };;
+		glm::mat4 mvp{ 1.0 };;
 
 		model = glm::translate(model, _cubePositions[i]);
 		float angle = 20.0f * i;

@@ -1,5 +1,3 @@
-
-
 #include "TestBullet4.h"
 
 #include "../TestHelper.h"
@@ -423,8 +421,8 @@ void TestBullet4::Draw(GameManager* manager)
 
 		//draw floor
 		{
-			glm::mat4 model;
-			glm::mat4 mvp;
+			glm::mat4 model{ 1.0 };;
+			glm::mat4 mvp{ 1.0 };;
 
 			//
 			mvp = _projection * camView * model;
@@ -436,8 +434,8 @@ void TestBullet4::Draw(GameManager* manager)
 
 		//draw ball
 		{
-			glm::mat4 model;
-			glm::mat4 mvp;
+			glm::mat4 model{ 1.0 };;
+			glm::mat4 mvp{ 1.0 };;
 
 			//get box matrix from bullet object
 			float cubeMatrix[16];

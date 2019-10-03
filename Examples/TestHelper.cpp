@@ -1,15 +1,5 @@
-
-
 #include "TestHelper.h"
 #include "InputHelper.h"
-
-#include "FreeTypeTests/TestFreeTypeFont.h"
-#include "FreeTypeTests/TestFreeTypeAtlas.h"
-
-#include "Basic/TestSprite.h"
-#include "Basic/TestCam3d.h"
-
-#include "Basic/TestToTexture.h"
 
 #include "Basic/Test1.h"
 #include "Basic/Test2.h"
@@ -18,30 +8,31 @@
 #include "Basic/Test5.h"
 #include "Basic/Test6.h"
 
+//#include "FreeTypeTests/TestFreeTypeFont.h"
+#include "FreeTypeTests/TestFreeTypeAtlas.h"
+
+#include "Input/TouchTest.h"
+#include "Basic/TestSprite.h"
+#include "Basic/TestCam3d.h"
+#include "Basic/TestToTexture.h"
+
 #include "Models/TestObjModel.h"
 #include "Models/TestObjKart.h"
-//#include "Models/TestMd5Model.h"
 
+////#include "Models/TestMd5Model.h"
+//
 #include "Bullet/TestBullet1.h"
 #include "Bullet/TestBullet2.h"
 #include "Bullet/TestBullet3.h"
 #include "Bullet/TestBullet4.h"
+//
 
-#include "Input/TouchTest.h"
-
+//
 #include "Lightening/TestLight1.h"
 #include "Lightening/TestLight2.h"
 #include "Lightening/TestLight3.h"
-#include "Lightening/TestLight4.h"
+//#include "Lightening/TestLight4.h"
 
-//#include "2D/Test2D1.h"
-
-//class and memory tests
-/*#include "Other/TextureTest.h"
-#include "Other/ShaderTest.h"
-#include "Other/VertexArrayTest.h"
-#include "Other/ObjModelTest.h"
-#include "Other/FontTest.h"*/
 
 TestHelper* TestHelper::_testHelper = NULL;
 
@@ -60,38 +51,39 @@ TestHelper::TestHelper()
 	_currentTest = 0;
 
 	//_tests.push_back(new TestMd5Model());
-
-	_tests.push_back(new TestBullet4());
-	_tests.push_back(new TestBullet1());
-	_tests.push_back(new TestBullet2());
-	_tests.push_back(new TestBullet3());
-
-
 	//
+
 
 	_tests.push_back(new Test1());
 	_tests.push_back(new Test2());
 	_tests.push_back(new Test3());
 	_tests.push_back(new Test4());
 	_tests.push_back(new Test5());
-	_tests.push_back(new Test6());
+    _tests.push_back(new Test6());
 
-	_tests.push_back(new TestFreeTypeFont());
+    _tests.push_back(new TouchTest());
+
 	_tests.push_back(new TestFreeTypeAtlas());
-
-	_tests.push_back(new TouchTest());
+    //_tests.push_back(new TestFreeTypeFont());
+	
 	_tests.push_back(new TestSprite());
 	_tests.push_back(new TestCam3d());
 	_tests.push_back(new TestToTexture());
 
 	_tests.push_back(new TestObjModel());
-	_tests.push_back(new TestObjKart());
+    _tests.push_back(new TestObjKart());
 
 	_tests.push_back(new TestLight1());
 	_tests.push_back(new TestLight2());
 	_tests.push_back(new TestLight3());
 	//_tests.push_back(new TestLight4());
 
+
+
+    _tests.push_back(new TestBullet1());
+    _tests.push_back(new TestBullet2());
+    _tests.push_back(new TestBullet3());
+    _tests.push_back(new TestBullet4());
 
 
 
@@ -112,7 +104,7 @@ TestHelper::TestHelper()
 	//common
 	_fontatlas = new TextureAtlas(512, 512);
 
-	_font = new TexturedFont(_fontatlas, 16, "Assets/Fonts/MODES.TTF");
+	_font = new TexturedFont(_fontatlas, 16, "Assets/Fonts/DroidSerif-Bold.ttf");
 	_font->CacheGlyphs(cache);
 	_font->SetShader(_fontShader);
 

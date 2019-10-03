@@ -140,6 +140,10 @@ void TestToTexture::Init()
 	//generate buffer object
 	_arrayObject->Generate();
 
+    //init matrices
+    view = glm::mat4(1.0f);
+    projection = glm::mat4(1.0f);
+
 	//transform
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 
@@ -236,7 +240,7 @@ void TestToTexture::Draw(GameManager* manager)
 		//use shader
 		_shader->Bind();
 
-		glm::mat4 model;
+		glm::mat4 model{ 1.0 };;
 
 		model = glm::rotate(model, angle, glm::vec3(0.5f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(scale, scale, scale));
@@ -262,7 +266,7 @@ void TestToTexture::Draw(GameManager* manager)
 		//use shader
 		_shader->Bind();
 
-		glm::mat4 model;
+		glm::mat4 model{ 1.0 };;
 
 		model = glm::rotate(model, angle, glm::vec3(0.5f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(scale, scale, scale));

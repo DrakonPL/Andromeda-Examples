@@ -217,10 +217,10 @@ void Test6::Draw(GameManager* manager)
 		scaleFactor = 0.01f;
 	}
 
-	glm::mat4 model;
-	glm::mat4 view;
-	glm::mat4 projection;
-	glm::mat4 mvp;
+	glm::mat4 model{ 1.0 };
+	glm::mat4 view{ 1.0 };;
+	glm::mat4 projection{ 1.0 };;
+	glm::mat4 mvp{ 1.0 };;
 
 	model = glm::rotate(model, angle, glm::vec3(0.5f, 1.0f, 0.0f));
 	model = glm::scale(model, glm::vec3(scale, scale, scale));

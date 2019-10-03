@@ -13,7 +13,7 @@ void ExampleGameManager::Configure()
 	//set pc resolution
 	#ifdef ANDROMEDA_GL3
 	{
-		Andromeda::Graphics::RenderManager::Instance()->SetWindowSize(960, 544);
+		Andromeda::Graphics::RenderManager::Instance()->SetWindowSize(1260, 720);
 
 		//Andromeda::Graphics::RenderManager::Instance()->SetWindowSize(-1, -1);
 		//Andromeda::Graphics::RenderManager::Instance()->SetFullScreen(true);

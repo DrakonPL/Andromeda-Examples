@@ -103,8 +103,11 @@ void TouchTest::HandleEvents(GameManager* manager)
 	InputHelper::Instance()->Update();
 }
 
+
+
 void TouchTest::Update(GameManager* manager)
 {
+    
 
 }
 
@@ -132,6 +135,27 @@ void TouchTest::Draw(GameManager* manager)
 		char buffer2[128];
 		sprintf(buffer2, "Right analog : %d %d", rX, rY);
 		_font->AddText(buffer2, _renderManager->GetWidth() / 2, 115, FontCenter);
+
+
+        bool test_up = _gamepad->KeyUp(Gamepad::Right);
+        bool test_down = _gamepad->KeyDown(Gamepad::Right);
+
+        if (test_up)
+        {
+            _font->AddText("Right up true", _renderManager->GetWidth() / 2, 155, FontCenter);
+        }else
+        {
+            _font->AddText("Right up false", _renderManager->GetWidth() / 2, 155, FontCenter);
+        }
+
+        if (test_down)
+        {
+            _font->AddText("Right down true", _renderManager->GetWidth() / 2, 195, FontCenter);
+        }
+        else
+        {
+            _font->AddText("Right down false", _renderManager->GetWidth() / 2, 195, FontCenter);
+        }
 	}
 
 	if (_frontTouch != 0)

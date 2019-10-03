@@ -1,5 +1,3 @@
-
-
 #include "TestBullet2.h"
 
 #include "../TestHelper.h"
@@ -9,29 +7,41 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <Andromeda/Utils/Logger.h>
+
 
 void TestBullet2::Init()
 {
+    Andromeda::Utils::Logger::Instance()->Log("Start Init");
+
 	_renderManager = RenderManager::Instance();
 	_shaderManager = ShaderManager::Instance();
 	_textureManager = TextureManager::Instance();
 
+    Andromeda::Utils::Logger::Instance()->Log("load shader");
 	//load shader
-	_shader = _shaderManager->LoadFromFile("simple", "Assets/Shaders/vertex_color_texture_transform_3d", "Assets/Shaders/vertex_color_texture", TextureColor);
+	_shader = _shaderManager->LoadFromFile("simple2", "Assets/Shaders/vertex_color_texture_transform_3d", "Assets/Shaders/vertex_color_texture", TextureColor);
 
+
+    Andromeda::Utils::Logger::Instance()->Log("load _cubeTexture");
 	_cubeTexture = _textureManager->LoadFromFile("Assets/Images/container.png");
+
+    Andromeda::Utils::Logger::Instance()->Log("load _floorTexture");
 	_floorTexture = _textureManager->LoadFromFile("Assets/Images/wood.png", Andromeda::Graphics::TextureFilerType::LinearFilter, Andromeda::Graphics::TextureColorType::Texture_RGBA, Andromeda::Graphics::TextureWrapType::Repeat, 7);
 
+    Andromeda::Utils::Logger::Instance()->Log("load car model");
 	//load car model
 	_carModel = new ModelObj();
 	_carModel->LoadBinary("Assets/Models/Obj/WillyKart/willy.objb");
 	_carModel->SetShader(_shader);
 
+    Andromeda::Utils::Logger::Instance()->Log("load wheel model");
 	//load wheel model
 	_wheelModel = new ModelObj();
 	_wheelModel->LoadBinary("Assets/Models/Obj/WillyKart/armywheels.objb");
 	_wheelModel->SetShader(_shader);
 
+    Andromeda::Utils::Logger::Instance()->Log("wheel positions");
 	//wheel positions	
 	_wheelPositions.push_back(glm::vec3(1.0f, 0.65f, 1.0f));
 	_wheelPositions.push_back(glm::vec3(1.0f, 0.65f, -0.75f));
@@ -68,10 +78,14 @@ void TestBullet2::Init()
 	InitPhysic();
 
 	_timer = new Timer();
+
+    Andromeda::Utils::Logger::Instance()->Log("END Init");
 }
 
 void TestBullet2::InitModels()
 {
+    Andromeda::Utils::Logger::Instance()->Log("Start Init Model");
+
 	//init cube model
 	{
 		//create data buffer object
@@ -239,11 +253,15 @@ void TestBullet2::InitModels()
 
 		//generate buffer object
 		_floorModel->Generate();
+
+        Andromeda::Utils::Logger::Instance()->Log("End Init Model");
 	}
 }
 
 void TestBullet2::InitPhysic()
 {
+    Andromeda::Utils::Logger::Instance()->Log("Start Init Physic");
+
 	btVector3 worldAabbMin(-1000, -1000, -1000);
 	btVector3 worldAabbMax(1000, 1000, 1000);
 	int maxProxies = 32766;
@@ -264,6 +282,8 @@ void TestBullet2::InitPhysic()
 	physDynamicsWorld = new btDiscreteDynamicsWorld(physDispatcher, physBroadphase, physSolver, physCollisionConfiguration);
 	physDynamicsWorld->setGravity(btVector3(0, -10, 0));
 
+
+    Andromeda::Utils::Logger::Instance()->Log("Create ground object");
 	//Create the ground object
 	{
 		// Create the ground shape
@@ -287,6 +307,7 @@ void TestBullet2::InitPhysic()
 		physDynamicsWorld->addRigidBody(physGroundBody);
 	}
 
+    Andromeda::Utils::Logger::Instance()->Log("Create the box object");
 	//Create the box object
 	{
 		//Create the box shape
@@ -312,13 +333,19 @@ void TestBullet2::InitPhysic()
 		physBoxBody->setActivationState(DISABLE_DEACTIVATION);
 	}
 
+    Andromeda::Utils::Logger::Instance()->Log("init car");
 	//init car
 	{
 		btVector3 carPos(0, 2.0f, 0);
 
+        Andromeda::Utils::Logger::Instance()->Log("new car");
 		_car = new BasicCar();
+
+        Andromeda::Utils::Logger::Instance()->Log("create car");
 		_car->Create(_carModel,_wheelModel,_shader, physDynamicsWorld, carPos, 650.0f);
 	}
+
+    Andromeda::Utils::Logger::Instance()->Log("ENd Init Physic");
 }
 
 glm::mat4 TestBullet2::btScalar2glmMat4(btScalar* matrix)
@@ -443,8 +470,8 @@ void TestBullet2::Draw(GameManager* manager)
 
 	//draw floor
 	{
-		glm::mat4 model;
-		glm::mat4 mvp;
+		glm::mat4 model{ 1.0 };;
+		glm::mat4 mvp{ 1.0 };;
 
 		//
 		mvp = _projection * camView * model;
@@ -459,8 +486,8 @@ void TestBullet2::Draw(GameManager* manager)
 
 	//draw box
 	{
-		glm::mat4 model;
-		glm::mat4 mvp;
+		glm::mat4 model{ 1.0 };;
+		glm::mat4 mvp{ 1.0 };;
 
 		//get box matrix from bullet object
 		float cubeMatrix[16];

@@ -1,5 +1,3 @@
-
-
 #include "TestBullet1.h"
 
 #include "../TestHelper.h"
@@ -470,9 +468,9 @@ void TestBullet1::Draw(GameManager* manager)
 
 	//draw floor
 	{
-		glm::mat4 model;
-		glm::mat4 view;
-		glm::mat4 mvp;
+		glm::mat4 model{ 1.0 };
+		glm::mat4 view{ 1.0 };
+		glm::mat4 mvp{ 1.0 };
 
 		//get view matrix from camera
 		view = _cam->GetViewMatrix();

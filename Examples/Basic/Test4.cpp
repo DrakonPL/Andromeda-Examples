@@ -1,5 +1,3 @@
-
-
 #include "Test4.h"
 #include <Andromeda/Graphics/GraphicsEnums.h>
 

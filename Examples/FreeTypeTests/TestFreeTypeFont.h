@@ -36,6 +36,7 @@ private:
 
 	//shader
 	Shader* _fontShader;
+	Shader* _fontShader2;
 
 	glm::mat4 _projection;
 
