@@ -152,6 +152,9 @@
     <ClCompile Include="..\..\..\Examples\Animation\TestAnimation2.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Animation\TestAnimation4.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Examples\2D\Test2D1.h">
@@ -263,6 +266,9 @@
       <Filter>Source Files\Animation</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Examples\Animation\TestAnimation2.h">
+      <Filter>Source Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Animation\TestAnimation4.h">
       <Filter>Source Files\Animation</Filter>
     </ClInclude>
   </ItemGroup>

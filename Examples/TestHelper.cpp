@@ -35,6 +35,7 @@
 #include "Animation/TestAnimation1.h"
 #include "Animation/TestAnimation2.h"
 #include "Animation/TestAnimation3.h"
+#include "Animation/TestAnimation4.h"
 
 
 TestHelper* TestHelper::_testHelper = NULL;
@@ -56,6 +57,7 @@ TestHelper::TestHelper()
 	_tests.push_back(new TestAnimation1());
 	_tests.push_back(new TestAnimation2());
 	_tests.push_back(new TestAnimation3());
+	_tests.push_back(new TestAnimation4());
 
 	_tests.push_back(new Test1());
 	_tests.push_back(new Test2());

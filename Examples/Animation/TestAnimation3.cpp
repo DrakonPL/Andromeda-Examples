@@ -17,7 +17,7 @@ void TestAnimation3::Init()
 	_cam = new Camera3d(glm::vec3(0.0f, 1.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 	//load shader
-	_shader_gpu = _shaderManager->LoadFromFile("skinned_gpu", "Assets/Shaders/skinned_gpu", "Assets/Shaders/lit", NormalTextureWeighJoint);
+	_shader_gpu = _shaderManager->LoadFromFile("skinned_gpu_one", "Assets/Shaders/skinned_gpu_one", "Assets/Shaders/lit", NormalTextureWeighJoint);
 
     //load texture
 	_texture = _textureManager->LoadFromFile("Assets/Animation/texture.png");
@@ -193,8 +193,14 @@ void TestAnimation3::Update(GameManager* manager)
 {
 	_dt = _timer->GetDelta();
 
-	mPlaybackTime = mClips[mCurrentClip].Sample(mCurrentPose, mPlaybackTime );
+
+	mPlaybackTime = mClips[mCurrentClip].Sample(mCurrentPose, mPlaybackTime + _dt);
 	mCurrentPose.GetMatrixPalette(mPosePalette);
+
+	std::vector<AnimMat4>& invBindPose = mSkeleton.GetInvBindPose();
+	for (unsigned int i = 0, size = (unsigned int)mPosePalette.size(); i < size; ++i) {
+		mPosePalette[i] = mPosePalette[i] * invBindPose[i];
+	}
 }
 
 void TestAnimation3::Draw(GameManager* manager)
@@ -224,7 +230,6 @@ void TestAnimation3::Draw(GameManager* manager)
 	_shader_gpu->SetUniform(VertexShader, "mvp", mvp);
 	_shader_gpu->SetUniform(FragmentShader, "light", lit);
 	_shader_gpu->Set(VertexShader, "pose", mPosePalette);
-	_shader_gpu->Set(VertexShader, "invBindPose", mSkeleton.GetInvBindPose());
 
 	for (unsigned int i = 0, size = mMeshes.size(); i < size; ++i) 
 	{

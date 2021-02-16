@@ -4,19 +4,15 @@ float3 out vNormal	: TEXCOORD1;
 
 uniform float4x4 mvp;
 uniform float4x4 model;
-
 uniform float4x4 pose[64];
-uniform float4x4 invBindPose[64];
 
 void main(float3 iPosition,float3 iNormal,float2 iTexCoord,float4 iWeight,int4 iJoint)
 {
-	float4x4 skin = float4x4(0.0f);
-
-	for(int i=0;i<4;i++)
-	{
-		skin += mul(invBindPose[iJoint[i]],pose[iJoint[i]]) * iWeight[i];
-	}
-
+	float4x4 skin = pose[iJoint.x]  * iWeight.x;
+			skin += pose[iJoint.y]  * iWeight.y;
+			skin += pose[iJoint.z]  * iWeight.z;
+			skin += pose[iJoint.w]  * iWeight.w;
+	
 	// apply skinning
 	float4 pos = mul(float4(iPosition, 1.f),skin);
 	float4 normal = mul(float4(iNormal, 0.f),skin);

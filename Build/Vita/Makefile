@@ -34,6 +34,7 @@ OBJS   = 	../../../Andromeda-Lib/Libs/tinyxml/tinystr.o \
 			../../Examples/Animation/TestAnimation1.o \
 			../../Examples/Animation/TestAnimation2.o \
 			../../Examples/Animation/TestAnimation3.o \
+			../../Examples/Animation/TestAnimation4.o \
 			../../Examples/Other/TextureTest.o \
 			../../Examples/Other/ShaderTest.o \
 			../../Examples/Other/VertexArrayTest.o \
