@@ -33,6 +33,9 @@
     <Filter Include="Source Files\Other">
       <UniqueIdentifier>{8a0e7bee-8beb-453b-bd74-d34c1962d35e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Animation">
+      <UniqueIdentifier>{7287dbb5-ac83-4156-abe2-e71afde9acfa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Examples\2D\Test2D1.cpp">
@@ -140,6 +143,15 @@
     <ClCompile Include="..\..\..\Examples\TestHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Animation\TestAnimation1.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Animation\TestAnimation3.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Animation\TestAnimation2.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Examples\2D\Test2D1.h">
@@ -243,6 +255,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Examples\TestHelper.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Animation\TestAnimation1.h">
+      <Filter>Source Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Animation\TestAnimation3.h">
+      <Filter>Source Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Animation\TestAnimation2.h">
+      <Filter>Source Files\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

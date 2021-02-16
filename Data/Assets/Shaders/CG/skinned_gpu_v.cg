@@ -1,0 +1,26 @@
+﻿float4 out vPosition : POSITION;
+float2 out vTexCoord : TEXCOORD0;
+float3 out vNormal	: TEXCOORD1;
+
+uniform float4x4 mvp;
+uniform float4x4 model;
+
+uniform float4x4 pose[64];
+uniform float4x4 invBindPose[64];
+
+void main(float3 iPosition,float3 iNormal,float2 iTexCoord,float4 iWeight,float4 iJoint)
+{
+	float4x4 skin = (pose[(int)iJoint.x] *  invBindPose[(int)iJoint.x]) * iWeight.x;
+	skin += (pose[(int)iJoint.y] * invBindPose[(int)iJoint.y]) * iWeight.y;
+	skin += (pose[(int)iJoint.z] * invBindPose[(int)iJoint.z]) * iWeight.z;
+	skin += (pose[(int)iJoint.w] * invBindPose[(int)iJoint.w]) * iWeight.w;
+	
+	// apply skinning
+	float4 pos = mul(float4(iPosition, 1.f),skin);
+	float4 normal = mul(float4(iNormal, 0.f),skin);
+	
+	// transform
+	vPosition = mul(pos,mvp);
+	vNormal = mul(normal,model).xyz;
+	vTexCoord = iTexCoord;
+}

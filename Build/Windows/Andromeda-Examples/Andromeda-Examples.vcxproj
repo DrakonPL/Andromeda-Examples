@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Examples\2D\Test2D1.cpp" />
     <ClCompile Include="..\..\..\Examples\Andromeda.cpp" />
+    <ClCompile Include="..\..\..\Examples\Animation\TestAnimation1.cpp" />
+    <ClCompile Include="..\..\..\Examples\Animation\TestAnimation2.cpp" />
+    <ClCompile Include="..\..\..\Examples\Animation\TestAnimation3.cpp" />
     <ClCompile Include="..\..\..\Examples\Basic\Test1.cpp" />
     <ClCompile Include="..\..\..\Examples\Basic\Test2.cpp" />
     <ClCompile Include="..\..\..\Examples\Basic\Test3.cpp" />
@@ -57,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Examples\2D\Test2D1.h" />
+    <ClInclude Include="..\..\..\Examples\Animation\TestAnimation1.h" />
+    <ClInclude Include="..\..\..\Examples\Animation\TestAnimation2.h" />
+    <ClInclude Include="..\..\..\Examples\Animation\TestAnimation3.h" />
     <ClInclude Include="..\..\..\Examples\Basic\Test1.h" />
     <ClInclude Include="..\..\..\Examples\Basic\Test2.h" />
     <ClInclude Include="..\..\..\Examples\Basic\Test3.h" />

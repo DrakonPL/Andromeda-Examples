@@ -31,7 +31,10 @@
 #include "Lightening/TestLight1.h"
 #include "Lightening/TestLight2.h"
 #include "Lightening/TestLight3.h"
-//#include "Lightening/TestLight4.h"
+
+#include "Animation/TestAnimation1.h"
+#include "Animation/TestAnimation2.h"
+#include "Animation/TestAnimation3.h"
 
 
 TestHelper* TestHelper::_testHelper = NULL;
@@ -50,9 +53,9 @@ TestHelper::TestHelper()
 {
 	_currentTest = 0;
 
-	//_tests.push_back(new TestMd5Model());
-	//
-
+	_tests.push_back(new TestAnimation1());
+	_tests.push_back(new TestAnimation2());
+	_tests.push_back(new TestAnimation3());
 
 	_tests.push_back(new Test1());
 	_tests.push_back(new Test2());
@@ -78,15 +81,10 @@ TestHelper::TestHelper()
 	_tests.push_back(new TestLight3());
 	//_tests.push_back(new TestLight4());
 
-
-
     _tests.push_back(new TestBullet1());
     _tests.push_back(new TestBullet2());
     _tests.push_back(new TestBullet3());
     _tests.push_back(new TestBullet4());
-
-
-
 
 	//memory tests
 	//_tests.push_back(new ShaderTest());

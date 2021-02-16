@@ -1,0 +1,15 @@
+﻿out float4 color : COLOR;
+
+uniform float3 light;
+uniform sampler2D ourTexture;
+
+void main(float2 vTexCoord : TEXCOORD0,float3 vNormal : TEXCOORD1)
+{
+	float4 diffuseColor = tex2D(ourTexture, vTexCoord);
+
+	float3 n = normalize(vNormal);
+	float3 l = normalize(light);
+	float diffuseIntensity = clamp(dot(n, l) + 0.1f, 0, 1);
+	
+	color = float4((diffuseColor * diffuseIntensity).xyz,1.0f);
+}
