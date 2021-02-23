@@ -25,6 +25,8 @@
 #include "Bullet/TestBullet2.h"
 #include "Bullet/TestBullet3.h"
 #include "Bullet/TestBullet4.h"
+#include "Bullet/BulletBallTest.h"
+#include "Bullet/BulletCharacterTest.h"
 //
 
 //
@@ -36,6 +38,8 @@
 #include "Animation/TestAnimation2.h"
 #include "Animation/TestAnimation3.h"
 #include "Animation/TestAnimation4.h"
+#include "Animation/TestAnimation5.h"
+
 
 
 TestHelper* TestHelper::_testHelper = NULL;
@@ -54,10 +58,20 @@ TestHelper::TestHelper()
 {
 	_currentTest = 0;
 
+	_tests.push_back(new BulletCharacterTest());
+	_tests.push_back(new BulletBallTest());
+	_tests.push_back(new TestBullet1());
+	_tests.push_back(new TestBullet2());
+	_tests.push_back(new TestBullet3());
+	_tests.push_back(new TestBullet4());
+
+
+	_tests.push_back(new TestAnimation5());
 	_tests.push_back(new TestAnimation1());
 	_tests.push_back(new TestAnimation2());
 	_tests.push_back(new TestAnimation3());
 	_tests.push_back(new TestAnimation4());
+
 
 	_tests.push_back(new Test1());
 	_tests.push_back(new Test2());
@@ -83,10 +97,7 @@ TestHelper::TestHelper()
 	_tests.push_back(new TestLight3());
 	//_tests.push_back(new TestLight4());
 
-    _tests.push_back(new TestBullet1());
-    _tests.push_back(new TestBullet2());
-    _tests.push_back(new TestBullet3());
-    _tests.push_back(new TestBullet4());
+
 
 	//memory tests
 	//_tests.push_back(new ShaderTest());

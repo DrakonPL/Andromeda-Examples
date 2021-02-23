@@ -155,6 +155,18 @@
     <ClCompile Include="..\..\..\Examples\Animation\TestAnimation4.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Animation\TestAnimation5.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Bullet\BulletBallTest.cpp">
+      <Filter>Source Files\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Bullet\DynamicCharacterController.cpp">
+      <Filter>Source Files\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Bullet\BulletCharacterTest.cpp">
+      <Filter>Source Files\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Examples\2D\Test2D1.h">
@@ -270,6 +282,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Examples\Animation\TestAnimation4.h">
       <Filter>Source Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Animation\TestAnimation5.h">
+      <Filter>Source Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Bullet\BulletBallTest.h">
+      <Filter>Source Files\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Bullet\DynamicCharacterController.h">
+      <Filter>Source Files\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Bullet\BulletCharacterTest.h">
+      <Filter>Source Files\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

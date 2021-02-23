@@ -51,6 +51,7 @@ void TestAnimation1::Init()
     Andromeda::Utils::Logger::Instance()->Log("Load gltf model\n");
 	std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Animation/nate2.gltf";
 	cgltf_data* gltf = LoadGLTFFile(modelFile.c_str());
+	LoadMaterials(gltf);
 	animatedMeshes = LoadAnimationMeshes(gltf);
 	FreeGLTFFile(gltf);
 

@@ -25,6 +25,7 @@
     <ClCompile Include="..\..\..\Examples\Animation\TestAnimation2.cpp" />
     <ClCompile Include="..\..\..\Examples\Animation\TestAnimation3.cpp" />
     <ClCompile Include="..\..\..\Examples\Animation\TestAnimation4.cpp" />
+    <ClCompile Include="..\..\..\Examples\Animation\TestAnimation5.cpp" />
     <ClCompile Include="..\..\..\Examples\Basic\Test1.cpp" />
     <ClCompile Include="..\..\..\Examples\Basic\Test2.cpp" />
     <ClCompile Include="..\..\..\Examples\Basic\Test3.cpp" />
@@ -36,6 +37,9 @@
     <ClCompile Include="..\..\..\Examples\Basic\TestToTexture.cpp" />
     <ClCompile Include="..\..\..\Examples\Basic\VitaTest.cpp" />
     <ClCompile Include="..\..\..\Examples\Bullet\BasicCar.cpp" />
+    <ClCompile Include="..\..\..\Examples\Bullet\BulletBallTest.cpp" />
+    <ClCompile Include="..\..\..\Examples\Bullet\BulletCharacterTest.cpp" />
+    <ClCompile Include="..\..\..\Examples\Bullet\DynamicCharacterController.cpp" />
     <ClCompile Include="..\..\..\Examples\Bullet\TestBullet1.cpp" />
     <ClCompile Include="..\..\..\Examples\Bullet\TestBullet2.cpp" />
     <ClCompile Include="..\..\..\Examples\Bullet\TestBullet3.cpp" />
@@ -65,6 +69,7 @@
     <ClInclude Include="..\..\..\Examples\Animation\TestAnimation2.h" />
     <ClInclude Include="..\..\..\Examples\Animation\TestAnimation3.h" />
     <ClInclude Include="..\..\..\Examples\Animation\TestAnimation4.h" />
+    <ClInclude Include="..\..\..\Examples\Animation\TestAnimation5.h" />
     <ClInclude Include="..\..\..\Examples\Basic\Test1.h" />
     <ClInclude Include="..\..\..\Examples\Basic\Test2.h" />
     <ClInclude Include="..\..\..\Examples\Basic\Test3.h" />
@@ -76,6 +81,9 @@
     <ClInclude Include="..\..\..\Examples\Basic\TestToTexture.h" />
     <ClInclude Include="..\..\..\Examples\Basic\VitaTest.h" />
     <ClInclude Include="..\..\..\Examples\Bullet\BasicCar.h" />
+    <ClInclude Include="..\..\..\Examples\Bullet\BulletBallTest.h" />
+    <ClInclude Include="..\..\..\Examples\Bullet\BulletCharacterTest.h" />
+    <ClInclude Include="..\..\..\Examples\Bullet\DynamicCharacterController.h" />
     <ClInclude Include="..\..\..\Examples\Bullet\TestBullet1.h" />
     <ClInclude Include="..\..\..\Examples\Bullet\TestBullet2.h" />
     <ClInclude Include="..\..\..\Examples\Bullet\TestBullet3.h" />
