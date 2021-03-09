@@ -36,6 +36,9 @@
     <Filter Include="Source Files\Animation">
       <UniqueIdentifier>{7287dbb5-ac83-4156-abe2-e71afde9acfa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Character">
+      <UniqueIdentifier>{57a97cda-ce0c-4f3f-aeac-ff707a010fc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Examples\2D\Test2D1.cpp">
@@ -167,6 +170,15 @@
     <ClCompile Include="..\..\..\Examples\Bullet\BulletCharacterTest.cpp">
       <Filter>Source Files\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Character\CharacterTest1.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Character\CharacterControllerTest.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Character\SimpleCharacterController.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Examples\2D\Test2D1.h">
@@ -294,6 +306,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Examples\Bullet\BulletCharacterTest.h">
       <Filter>Source Files\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Character\CharacterTest1.h">
+      <Filter>Source Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Character\CharacterControllerTest.h">
+      <Filter>Source Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Character\SimpleCharacterController.h">
+      <Filter>Source Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Character\OrbitCam.h">
+      <Filter>Source Files\Character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

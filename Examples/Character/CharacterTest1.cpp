@@ -1,4 +1,4 @@
-#include "TestAnimation5.h"
+#include "CharacterTest1.h"
 
 #include "../TestHelper.h"
 #include "../InputHelper.h"
@@ -7,7 +7,13 @@
 #include "Andromeda/Graphics/Animation/GLTFLoader.h"
 #include "Andromeda/Graphics/Animation/RearrangeBones.h"
 
-void TestAnimation5::Init()
+#include <glm/glm.hpp>
+
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include <math.h>
+
+void CharacterTest1::Init()
 {
 	_renderManager = RenderManager::Instance();
 	_shaderManager = ShaderManager::Instance();
@@ -15,9 +21,10 @@ void TestAnimation5::Init()
 
 	//cam
 	_cam = new Camera3d(glm::vec3(0.0f, 1.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+	_orbitCam = new OrbitCam(glm::vec3(0.0f, 1.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	//load shader
-	_shader_gpu = _shaderManager->LoadFromFile("skinned_gpu_color", "Assets/Shaders/skinned_gpu_color", "Assets/Shaders/lit_color", NormalTextureWeighJoint);
+	_shader_gpu = _shaderManager->LoadFromFile("skinned_gpu_one", "Assets/Shaders/skinned_gpu_one", "Assets/Shaders/lit", NormalTextureWeighJoint);
 
     //load texture
 	_texture = _textureManager->LoadFromFile("Assets/Animation/texture.png");
@@ -36,7 +43,7 @@ void TestAnimation5::Init()
 		_mouse = _inputManager->GetMouseDevice(0);
 
 		//disable cursor
-		_mouse->SetCursorVisible(false);
+		_mouse->SetCursorVisible(true);
 
 		_useMouse = true;
 		_firstMouse = true;
@@ -48,7 +55,7 @@ void TestAnimation5::Init()
 	_timer = new Timer();
 
 	//
-	std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Animation/Ducky.gltf";
+	std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Nate.gltf";
 	cgltf_data* gltf = LoadGLTFFile(modelFile.c_str());
 	mMeshes = LoadAnimationMeshes(gltf);
 	mSkeleton = LoadSkeleton(gltf);
@@ -69,50 +76,64 @@ void TestAnimation5::Init()
 		mMeshes[i].CreateMesh(SkinningType::GPU);
 	}
 
-	mCurrentClip = 1;
+	mCurrentClip = 0;
 	mCurrentPose = mSkeleton.GetRestPose();
 
 
 	mSkinType = SkinningType::GPU;
 }
 
-void TestAnimation5::Enter()
+void CharacterTest1::Enter()
 {
 
 }
 
-void TestAnimation5::CleanUp()
+void CharacterTest1::CleanUp()
 {
 	delete _cam;
 	delete _timer;
 }
 
-void TestAnimation5::Pause()
+void CharacterTest1::Pause()
 {
 
 }
 
-void TestAnimation5::Resume()
+void CharacterTest1::Resume()
 {
 
 }
 
-void TestAnimation5::GamePause()
+void CharacterTest1::GamePause()
 {
 
 }
 
-void TestAnimation5::GameResume()
+void CharacterTest1::GameResume()
 {
 
 }
 
-void TestAnimation5::HandleEvents(GameManager* manager)
+template <typename T> int sgn(T val) {
+	return (T(0) < val) - (val < T(0));
+}
+
+void CharacterTest1::HandleEvents(GameManager* manager)
 {
-	if (_mouse != 0 && _useMouse)
+	if (_mouse != 0 && _useMouse && _mouse->ButtonUp(Mouse::Button::Left))
 	{
 		int posx = _mouse->GetPosX();
-		int posy = _mouse->GetPosY() * -1.0f;
+		int posy = _mouse->GetPosY();
+
+		moveX = posx;
+		moveY = posy;
+
+	}
+
+	if (_mouse != 0 && _useMouse && _mouse->ButtonDown(Mouse::Button::Left))
+	{
+		int posx = _mouse->GetPosX();
+		int posy = _mouse->GetPosY();
 
 		if (_firstMouse)
 		{
@@ -125,10 +146,41 @@ void TestAnimation5::HandleEvents(GameManager* manager)
 		int xoffset = posx - moveX;
 		int yoffset = posy - moveY;
 
+
+
+		//_cam->ProcessMouseMovement(xoffset, yoffset, false);
+
+		// Get the homogenous position of the camera and pivot point
+		glm::vec4 position(_orbitCam->GetEye().x, _orbitCam->GetEye().y, _orbitCam->GetEye().z, 1);
+		glm::vec4 pivot(_orbitCam->GetLookAt().x, _orbitCam->GetLookAt().y, _orbitCam->GetLookAt().z, 1);
+
+		// step 1 : Calculate the amount of rotation given the mouse movement.
+		float deltaAngleX = (2 * M_PI / _renderManager->GetWidth()); // a movement from left to right = 2*PI = 360 deg
+		float deltaAngleY = (M_PI / _renderManager->GetHeight());  // a movement from top to bottom = PI = 180 deg
+		float xAngle = (moveX - posx) * deltaAngleX;
+		float yAngle = (moveY - posy) * deltaAngleY;
+
+		// Extra step to handle the problem when the camera direction is the same as the up vector
+		float cosAngle = glm::dot(_orbitCam->GetViewDir(), _orbitCam->GetUpVector());
+		if (cosAngle * sgn(yAngle) > 0.99f)
+			yAngle = 0;
+
+		// step 2: Rotate the camera around the pivot point on the first axis.
+		glm::mat4x4 rotationMatrixX(1.0f);
+		rotationMatrixX = glm::rotate(rotationMatrixX, xAngle, _orbitCam->GetUpVector());
+		position = (rotationMatrixX * (position - pivot)) + pivot;
+
+		// step 3: Rotate the camera around the pivot point on the second axis.
+		glm::mat4x4 rotationMatrixY(1.0f);
+		rotationMatrixY = glm::rotate(rotationMatrixY, yAngle, _orbitCam->GetRightVector());
+		glm::vec3 finalPosition = (rotationMatrixY * (position - pivot)) + pivot;
+
+		// Update the camera view (we keep the same lookat and the same up vector)
+		_orbitCam->SetCameraView(finalPosition, _orbitCam->GetLookAt(), _orbitCam->GetUpVector());
+
+		// Update the mouse position for the next rotation
 		moveX = posx;
 		moveY = posy;
-
-		_cam->ProcessMouseMovement(xoffset, yoffset, false);
 	}
 
 
@@ -189,15 +241,21 @@ void TestAnimation5::HandleEvents(GameManager* manager)
 	InputHelper::Instance()->Update();
 }
 
-void TestAnimation5::Update(GameManager* manager)
+void CharacterTest1::Update(GameManager* manager)
 {
 	_dt = _timer->GetDelta();
 
+
 	mPlaybackTime = mClips[mCurrentClip].Sample(mCurrentPose, mPlaybackTime + _dt);
 	mCurrentPose.GetMatrixPalette(mPosePalette);
+
+	std::vector<AnimMat4>& invBindPose = mSkeleton.GetInvBindPose();
+	for (unsigned int i = 0, size = (unsigned int)mPosePalette.size(); i < size; ++i) {
+		mPosePalette[i] = mPosePalette[i] * invBindPose[i];
+	}
 }
 
-void TestAnimation5::Draw(GameManager* manager)
+void CharacterTest1::Draw(GameManager* manager)
 {
 	//start frame
 	_renderManager->StartFrame();
@@ -217,54 +275,21 @@ void TestAnimation5::Draw(GameManager* manager)
 	glm::vec3 lit(1, 1, 1);
 
 	//get view matrix from camera
-	view = _cam->GetViewMatrix();
+	view = _orbitCam->GetViewMatrix();
 	mvp = _projection * view * model;
-
-	glm::vec3 viewPosition = _cam->Position;
-
-
-	glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
-	glm::vec3 lampPosition = glm::vec3(0.0f, 5.0f, 5.0f);
-	glm::vec3 diffuseColor = lightColor * glm::vec3(0.7f); // decrease the influence
-	glm::vec3 ambientColor = diffuseColor * glm::vec3(0.3f); // low influence
-	glm::vec3 lispecular = glm::vec3(1.0f, 1.0f, 1.0f); 
-
-	glm::vec3 matambient = glm::vec3(0.3f, 0.3f, 0.3f);
-	glm::vec3 matspecular = glm::vec3(0.5f, 0.5f, 0.5f); 
-
 
 	_shader_gpu->SetUniform(VertexShader, "model", model);
 	_shader_gpu->SetUniform(VertexShader, "mvp", mvp);
+	_shader_gpu->SetUniform(FragmentShader, "light", lit);
 	_shader_gpu->Set(VertexShader, "pose", mPosePalette);
-	_shader_gpu->Set(VertexShader, "invBindPose", mSkeleton.GetInvBindPose());
-
-	//_shader_gpu->SetUniform(FragmentShader, "liposition", lampPosition);
-	_shader_gpu->SetUniform(FragmentShader, "viewPos", viewPosition);
-
-	//_shader_gpu->SetUniform(FragmentShader, "liambient", ambientColor);
-	//_shader_gpu->SetUniform(FragmentShader, "lidiffuse", diffuseColor);
-	//_shader_gpu->SetUniform(FragmentShader, "lispecular", lispecular);
-
-	_shader_gpu->SetUniform(FragmentShader, "light", lampPosition);
-
 
 	for (unsigned int i = 0, size = mMeshes.size(); i < size; ++i) 
-	{		
-		glm::vec3 myColor = mMeshes[i].GetMaterial()->GetColor(MaterialColorDiffuse);
-
-		_shader_gpu->SetUniform(FragmentShader, "myColor", myColor);
-
-		// material properties
-		//_shader_gpu->SetUniform(FragmentShader, "matambient", matambient);
-		//_shader_gpu->SetUniform(FragmentShader, "matdiffuse", myColor);
-		//_shader_gpu->SetUniform(FragmentShader, "matspecular", matspecular); // specular lighting doesn't have full effect on this object's material
-		//_shader_gpu->SetUniform(FragmentShader, "matshininess", 32.0f);
-
+	{
 		mMeshes[i].Draw();
 	}
 
 	//draw test info
-	TestHelper::Instance()->AddInfoText("Skinning (GPU) Gltf model test  - color.");
+	TestHelper::Instance()->AddInfoText("Skinning (GPU) Gltf model test.");
 	TestHelper::Instance()->ShowInfoText();
 
 	//end frame

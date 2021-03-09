@@ -40,6 +40,8 @@
 #include "Animation/TestAnimation4.h"
 #include "Animation/TestAnimation5.h"
 
+#include "Character/CharacterTest1.h"
+#include "Character/CharacterControllerTest.h"
 
 
 TestHelper* TestHelper::_testHelper = NULL;
@@ -57,6 +59,13 @@ TestHelper* TestHelper::Instance()
 TestHelper::TestHelper()
 {
 	_currentTest = 0;
+	_tests.push_back(new TestAnimation5());
+	_tests.push_back(new TestAnimation1());
+	_tests.push_back(new TestAnimation2());
+	_tests.push_back(new TestAnimation3());
+	_tests.push_back(new TestAnimation4());
+
+	_tests.push_back(new CharacterTest1());
 
 	_tests.push_back(new BulletCharacterTest());
 	_tests.push_back(new BulletBallTest());
@@ -66,11 +75,7 @@ TestHelper::TestHelper()
 	_tests.push_back(new TestBullet4());
 
 
-	_tests.push_back(new TestAnimation5());
-	_tests.push_back(new TestAnimation1());
-	_tests.push_back(new TestAnimation2());
-	_tests.push_back(new TestAnimation3());
-	_tests.push_back(new TestAnimation4());
+
 
 
 	_tests.push_back(new Test1());

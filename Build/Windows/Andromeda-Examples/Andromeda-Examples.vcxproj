@@ -44,6 +44,9 @@
     <ClCompile Include="..\..\..\Examples\Bullet\TestBullet2.cpp" />
     <ClCompile Include="..\..\..\Examples\Bullet\TestBullet3.cpp" />
     <ClCompile Include="..\..\..\Examples\Bullet\TestBullet4.cpp" />
+    <ClCompile Include="..\..\..\Examples\Character\CharacterControllerTest.cpp" />
+    <ClCompile Include="..\..\..\Examples\Character\CharacterTest1.cpp" />
+    <ClCompile Include="..\..\..\Examples\Character\SimpleCharacterController.cpp" />
     <ClCompile Include="..\..\..\Examples\ExampleGameManager.cpp" />
     <ClCompile Include="..\..\..\Examples\FreeTypeTests\TestFreeTypeAtlas.cpp" />
     <ClCompile Include="..\..\..\Examples\FreeTypeTests\TestFreeTypeFont.cpp" />
@@ -88,6 +91,10 @@
     <ClInclude Include="..\..\..\Examples\Bullet\TestBullet2.h" />
     <ClInclude Include="..\..\..\Examples\Bullet\TestBullet3.h" />
     <ClInclude Include="..\..\..\Examples\Bullet\TestBullet4.h" />
+    <ClInclude Include="..\..\..\Examples\Character\CharacterControllerTest.h" />
+    <ClInclude Include="..\..\..\Examples\Character\CharacterTest1.h" />
+    <ClInclude Include="..\..\..\Examples\Character\OrbitCam.h" />
+    <ClInclude Include="..\..\..\Examples\Character\SimpleCharacterController.h" />
     <ClInclude Include="..\..\..\Examples\ExampleGameManager.h" />
     <ClInclude Include="..\..\..\Examples\FreeTypeTests\TestFreeTypeAtlas.h" />
     <ClInclude Include="..\..\..\Examples\FreeTypeTests\TestFreeTypeFont.h" />
