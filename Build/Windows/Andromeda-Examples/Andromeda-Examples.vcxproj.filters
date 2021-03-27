@@ -179,6 +179,15 @@
     <ClCompile Include="..\..\..\Examples\Character\SimpleCharacterController.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest1.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest2.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest3.cpp">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Examples\2D\Test2D1.h">
@@ -318,6 +327,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Examples\Character\OrbitCam.h">
       <Filter>Source Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest1.h">
+      <Filter>Source Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest2.h">
+      <Filter>Source Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest3.h">
+      <Filter>Source Files\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
