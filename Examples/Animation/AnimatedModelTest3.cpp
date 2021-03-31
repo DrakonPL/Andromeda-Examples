@@ -12,6 +12,14 @@
 
 #include <Andromeda/Math/Math.h>
 
+float Deg2Rad = 3.141592 * 2.0F / 360.0F;
+
+// Radians-to-degrees conversion constant (RO).
+float Rad2Deg = 1.0F / Deg2Rad;
+
+
+float turnRefVelocity = 0;
+
 void AnimatedModelTest3::Init()
 {
 	_renderManager = RenderManager::Instance();
@@ -22,8 +30,9 @@ void AnimatedModelTest3::Init()
 	_cam = new Camera3d(glm::vec3(0.0f, 2.0f, -3.0f), glm::vec3(0.0f, 1.0f, 0.0f), 90.0f, -10.0f);
 
 	//load shader
-	_shader_gpu = _shaderManager->LoadFromFile("skinned_gpu_texture", "Assets/Shaders/skinned_gpu_texture", "Assets/Shaders/lit_texture", NormalTextureWeighJoint);
-	//_shader_gpu = _shaderManager->LoadFromFile("skinned_gpu_color", "Assets/Shaders/skinned_gpu_color", "Assets/Shaders/lit_color", NormalTextureWeighJoint);
+	_shaderTexture = _shaderManager->LoadFromFile("skinned_gpu_texture", "Assets/Shaders/skinned_gpu_texture", "Assets/Shaders/lit_texture", NormalTextureWeighJoint);
+	_shaderColor = _shaderManager->LoadFromFile("skinned_gpu_color", "Assets/Shaders/skinned_gpu_color", "Assets/Shaders/lit_color", NormalTextureWeighJoint);
+	_shaderStatic = _shaderManager->LoadFromFile("static_color", "Assets/Shaders/static_color", "Assets/Shaders/lit_color", TextureNormal);
 
 
     //load texture
@@ -55,13 +64,34 @@ void AnimatedModelTest3::Init()
 	_timer = new Timer();
 
 	//player
-	std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Nate3.gltf";
-	//std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Ducky2.gltf";
+	//std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Nate3.gltf";
+	std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Ducky2.glb";
 
 	_animatedModel = new AnimatedModel();
 	_animatedModel->SetSkinningType(SkinningType::GPU);
 	_animatedModel->LoadAnimatedModel(modelFile);
-	_animatedModel->SetShader(_shader_gpu);
+	_animatedModel->SetShader(_shaderColor);
+
+
+	//load sword asset
+	std::string swordFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Axe.gltf";
+	
+	_swordModel = new AnimatedModel();
+	_swordModel->SetSkinningType(SkinningType::None);
+	_swordModel->LoadStaticModelAndConnectBone(swordFile, _animatedModel->GetBoneIndex("armRight"), glm::vec3(-0.383824f, 0.193997f, 0), glm::vec3(-35.0f * Deg2Rad, 0.0, 0));
+	//_swordModel->LoadStaticModelAndConnectBone(swordFile, 9);
+	_swordModel->SetShader(_shaderColor);
+
+	//model = glm::translate(model, glm::vec3(-0.383824f, 0.193997f, 0));
+	//model = glm::rotate(model, -35.0f * Deg2Rad, glm::vec3(1.0f, 0.0f, 0.0f));
+
+	//armRight
+
+	//jak bym chcuia³ ¿eby to dzia³a³o
+	//1 - ³adujê model - chcê za³adowaæ narazie sam mesh ale z okreœleniem ¿e nie jest to static mesh tylko bêdzie pod³¹czony do kosci
+	//2 - dodajê do animowanego modelu okreœlone lub wszystkie meshe z modelu oraz ustawiam nazwê koœci do ktorej ma byæ przypiêty mesh
+	//j
+
 
 	_currentAnimation = "Idle";
 	_animatedModel->SetCurrentClip(_currentAnimation);
@@ -129,6 +159,9 @@ void AnimatedModelTest3::Init()
 		_floorModel->Generate();
 	}
 
+	//auto follow option
+	autoFollow = true;
+	followTimer = 0.0f;
 }
 
 void AnimatedModelTest3::Enter()
@@ -163,96 +196,32 @@ void AnimatedModelTest3::GameResume()
 }
 
 
- float Deg2Rad = 3.141592 * 2.0F / 360.0F;
 
-// Radians-to-degrees conversion constant (RO).
- float Rad2Deg = 1.0F / Deg2Rad;
-
-
-float turnRefVelocity = 0;
 
 
 
 
 void AnimatedModelTest3::HandleEvents(GameManager* manager)
 {
-	
-
-
-	
-
-
-		//if (_keyboard->KeyDown(Key::W))
-		//{
-
-		//	glm::vec3 front = { _cam->GetFrontVector().x,0.0f,_cam->GetFrontVector().z };
-		//	_playerPosition += front * (_playerSpeed * _dt);
-
-		//	if(_currentAnimation != "Running")
-		//	{
-		//		_currentAnimation = "Running";
-		//		_animatedModel->FadeToClip(_currentAnimation,0.3f);
-		//		//_animatedModel->SetCurrentClip(_currentAnimation);
-		//		anyAction = true;
-		//	}
-		//}
-
-		//if (_keyboard->KeyDown(Key::S))
-		//{
-		//	if (_currentAnimation != "Walking")
-		//	{
-		//		_currentAnimation = "Walking";
-		//		_animatedModel->FadeToClip(_currentAnimation, 0.3f);
-
-		//		anyAction = true;
-		//	}
-		//}
-
-		//if (_keyboard->KeyDown(Key::A))
-		//{
-		//	if (_currentAnimation != "Walk Strafe Left")
-		//	{
-		//		_currentAnimation = "Walk Strafe Left";
-		//		_animatedModel->FadeToClip(_currentAnimation, 0.3f);
-
-		//		anyAction = true;
-		//	}
-		//}
-
-		//if (_keyboard->KeyDown(Key::D))
-		//{
-		//	if (_currentAnimation != "Walk Strafe Right")
-		//	{
-		//		_currentAnimation = "Walk Strafe Right";
-		//		_animatedModel->FadeToClip(_currentAnimation, 0.3f);
-
-		//		anyAction = true;
-		//	}
-		//}
-
-		//if(_keyboard->KeyUp(Key::W) && _keyboard->KeyUp(Key::S) && _keyboard->KeyUp(Key::A) && _keyboard->KeyUp(Key::D))
-		//{
-		//	if (_currentAnimation != "Idle")
-		//	{
-		//		_currentAnimation = "Idle";
-		//		_animatedModel->FadeToClip(_currentAnimation, 0.3f);
-
-		//		anyAction = true;
-		//	}
-		//}
-
-
-
+	float rutnSmoothTime = 0.1f;
 
 	if (_gamepad != 0)
 	{
-		//camera rotation
-		float rotatex = _gamepad->RightAnalogX() * -1.0f * _playerSpeed;
-		float rotatey = (_gamepad->RightAnalogY() * -1.0f) * _playerSpeed;
+		//
+		anyAnimation = false;
 
-		_orbitCam->MoveOrbit(rotatex, rotatey, _renderManager->GetWidth(), _renderManager->GetHeight());
 
-		float rutnSmoothTime = 0.1f;
+		if (_gamepad->RightAnalogX() > 0.1f || _gamepad->RightAnalogY() > 0.1f || _gamepad->RightAnalogX() < -0.1f || _gamepad->RightAnalogY() < -0.1f)
+		{
+			//camera rotation
+			float rotatex = _gamepad->RightAnalogX() * -1.0f * _playerSpeed;
+			float rotatey = (_gamepad->RightAnalogY() * -1.0f) * _playerSpeed;
+
+			_orbitCam->MoveOrbit(rotatex, rotatey, _renderManager->GetWidth(), _renderManager->GetHeight());
+
+			autoFollow = false;
+			followTimer = 3.0f;
+		}
 
 		//player movement
 		if(_gamepad->LeftAnalogX() > 0.1f || _gamepad->LeftAnalogY() > 0.1f || _gamepad->LeftAnalogX() < -0.1f || _gamepad->LeftAnalogY() < -0.1f)
@@ -262,7 +231,7 @@ void AnimatedModelTest3::HandleEvents(GameManager* manager)
 			_playerFacing = glm::normalize(_playerFacing);
 
 			//convert it to angle
-			float targetAngle = atan2f(_playerFacing.x, _playerFacing.y) * Rad2Deg;
+			targetAngle = atan2f(_playerFacing.x, _playerFacing.y) * Rad2Deg;
 
 			//get vector where camera is facing
 			glm::vec2 position2(_orbitCam->GetEye().x, _orbitCam->GetEye().z);
@@ -271,11 +240,19 @@ void AnimatedModelTest3::HandleEvents(GameManager* manager)
 			glm::vec2 cameraDirection = glm::normalize(  (pivot2 - position2));
 
 			//convert it to angle
-			float camAngle = atan2f(cameraDirection.x, cameraDirection.y) * Rad2Deg;
+			camAngle = atan2f(cameraDirection.x, cameraDirection.y) * Rad2Deg;
 
 			//set correct player rotation with smooth transition
-			_playerRotation = Andromeda::Math::Math::SmoothDampAngle(_playerRotation * Rad2Deg, targetAngle + camAngle, turnRefVelocity, rutnSmoothTime, 999.0f, _dt) * Deg2Rad;
+			_playerRotation = Andromeda::Math::Math::SmoothDampAngle(_playerRotation * Rad2Deg, targetAngle + camAngle, turnRefVelocity, rutnSmoothTime, 999.0f, _dt);
 
+
+			if (_playerRotation > 180.0F)
+				_playerRotation -= 360.0F;
+
+			if (_playerRotation < -180.0F)
+				_playerRotation += 360.0F;
+
+			_playerRotation = _playerRotation * Deg2Rad;
 
 			//calculate where player will be moving
 			glm::vec3 front = glm::quat(glm::vec3(0, targetAngle * Deg2Rad, 0)) * glm::vec3( cameraDirection.x, 0.0f, cameraDirection.y);
@@ -283,13 +260,47 @@ void AnimatedModelTest3::HandleEvents(GameManager* manager)
 			//set position 
 		    _playerPosition += front * _playerSpeed * _dt;
 
+			//set animation info
+			anyAnimation = true;
 
-			if (_currentAnimation != "Running")
+			//if we are in jump state then don't play running animation
+            if (jump)
+            {
+				return;
+            }
+
+			if (_currentAnimation != "Run")
 			{
-				_currentAnimation = "Running";
+				_currentAnimation = "Run";
 				_animatedModel->FadeToClip(_currentAnimation, 0.3f);
 			}
-		}else
+		}
+
+		if (_gamepad->KeyDown(Gamepad::Cross))
+		{
+			if (_currentAnimation != "Jump")
+			{
+				_currentAnimation = "Jump";
+
+				//get jump time
+				jumpTime = _animatedModel->GetClipDuration(_currentAnimation);
+
+				//set jump variable
+				jump = true;
+
+				//play animation
+				_animatedModel->PlayOnce(_currentAnimation);
+			}
+
+			//set animation info
+			anyAnimation = true;
+		}
+
+		//idle ma siê pojawiæ tylko wtedy je¿eli nie mamy wciœniêtego jakiegoœ guzika animacji
+		//oraz nie leci ¿adna animacja która nie koniecznie potrzebuje guzika np jump
+
+
+		if(!anyAnimation && !jump)
 		{
 			if (_currentAnimation != "Idle")
 			{
@@ -297,6 +308,8 @@ void AnimatedModelTest3::HandleEvents(GameManager* manager)
 				_animatedModel->FadeToClip(_currentAnimation, 0.3f);
 			}
 		}
+
+		
 	}
 
 
@@ -317,7 +330,51 @@ void AnimatedModelTest3::Update(GameManager* manager)
 {
 	_dt = _timer->GetDelta();
 
+	//update model
 	_animatedModel->Update(_dt);
+
+	//get palette matrix
+	_swordModel->SetPosePalette(_animatedModel->GetPosePalette());
+	_swordModel->SetInvBindPose(_animatedModel->GetInvBindPose());
+
+	//
+
+	if( jump)
+	{
+		jumpTime -= _dt;
+
+        if (jumpTime <= 0.0f)
+        {
+			jump = false;
+        }
+	}
+
+	//get vector where camera is facing
+	glm::vec2 position2(_orbitCam->GetEye().x, _orbitCam->GetEye().z);
+	glm::vec2 pivot2(_orbitCam->GetLookAt().x, _orbitCam->GetLookAt().z);
+
+	glm::vec2 cameraDirection = glm::normalize((pivot2 - position2));
+
+	//convert it to angle
+	camAngle = atan2f(cameraDirection.x, cameraDirection.y) * Rad2Deg;
+
+    if (!autoFollow)
+    {
+		followTimer -= _dt;
+
+        if (followTimer <= 0.0f)
+        {
+			autoFollow = true;
+        }
+    }
+
+    if (autoFollow)
+    {
+		rotateCamAngle = Andromeda::Math::Math::MoveTowardsAngle(camAngle, _playerRotation * Rad2Deg, 500 * _dt);
+
+		float test = rotateCamAngle - camAngle;
+		_orbitCam->MoveOrbit(test, 0, _renderManager->GetWidth(), _renderManager->GetHeight());
+    }
 }
 
 void AnimatedModelTest3::Draw(GameManager* manager)
@@ -355,45 +412,98 @@ void AnimatedModelTest3::Draw(GameManager* manager)
 		_floorModel->Draw();
 	}
 
+	glm::mat4 playerModel{ 1.0f };
 	//draw player
 	{
 		//use texture
 		_renderManager->UseTexture(_texture);
 
 		//use shader
-		_shader_gpu->Bind();
+		_shaderColor->Bind();
+
+		//glm::mat4 view{ 1.0f };
+		glm::mat4 mvp{ 1.0f };
+		glm::vec3 lit(1, 1, 1);
+
+		playerModel = glm::translate(playerModel, _playerPosition);
+		playerModel = glm::rotate(playerModel, _playerRotation, glm::vec3(0.0f, 1.0f, 0.0f));
+
+		//get view matrix from camera
+		//view = _cam->GetViewMatrix();
+		mvp = _projection * camView * playerModel;
+
+		glm::vec3 viewPosition = _orbitCam->GetEye() + glm::vec3(_playerPosition.x, 0, _playerPosition.z);
+		glm::vec3 lampPosition = glm::vec3(0.0f, 5.0f, 5.0f);
+
+
+		_shaderColor->SetUniform(VertexShader, "model", playerModel);
+		_shaderColor->SetUniform(VertexShader, "mvp", mvp);
+
+		_shaderColor->SetUniform(FragmentShader, "viewPos", viewPosition);
+		_shaderColor->SetUniform(FragmentShader, "light", lampPosition);
+
+
+		_animatedModel->Draw();
+	}
+
+
+	//draw sword
+	{
+		//use shader
+		_shaderColor->Bind();
 
 		glm::mat4 model{ 1.0f };
 		//glm::mat4 view{ 1.0f };
 		glm::mat4 mvp{ 1.0f };
 		glm::vec3 lit(1, 1, 1);
 
-		model = glm::translate(model, _playerPosition);
-		model = glm::rotate(model, _playerRotation, glm::vec3(0.0f, 1.0f, 0.0f));
+		//-0.383824 m
+		//0.193997 m
+
+		//model = glm::translate(model, glm::vec3(-0.383824f, 0.193997f, 0));
+		//model = glm::rotate(model, -35.0f * Deg2Rad, glm::vec3(1.0f, 0.0f, 0.0f));
+		//model = glm::rotate(model, 90.0f * Deg2Rad, glm::vec3(0.0f, 0.0f, 1.0f));
+		//model = glm::rotate(model, 90.0f * Deg2Rad, glm::vec3(0.0f, 1.0f, 0.0f));
+
+		model = playerModel * model;
+		//model = glm::rotate(model, _playerRotation, glm::vec3(0.0f, 1.0f, 0.0f));
+		//model = glm::rotate(model, 180.1f * Deg2Rad, glm::vec3(1.0f, 0.0f, 0.0f));
+		//model = glm::rotate(model, 90.0f * Deg2Rad, glm::vec3(0.0f, 0.0f, 1.0f));
 
 		//get view matrix from camera
 		//view = _cam->GetViewMatrix();
 		mvp = _projection * camView * model;
 
-		glm::vec3 viewPosition = _cam->Position;
-
-
+		glm::vec3 viewPosition = _orbitCam->GetEye() + glm::vec3(_playerPosition.x, 0, _playerPosition.z);
 		glm::vec3 lampPosition = glm::vec3(0.0f, 5.0f, 5.0f);
 
+		_shaderColor->SetUniform(VertexShader, "model", model);
+		_shaderColor->SetUniform(VertexShader, "mvp", mvp);
 
-		_shader_gpu->SetUniform(VertexShader, "model", model);
-		_shader_gpu->SetUniform(VertexShader, "mvp", mvp);
+		_shaderColor->SetUniform(FragmentShader, "viewPos", viewPosition);
+		_shaderColor->SetUniform(FragmentShader, "light", lampPosition);
 
-		_shader_gpu->SetUniform(FragmentShader, "viewPos", viewPosition);
-		_shader_gpu->SetUniform(FragmentShader, "light", lampPosition);
-
-
-		_animatedModel->Draw();
-
+		_swordModel->Draw();
 	}
 
+
+
 	//draw test info
-	TestHelper::Instance()->AddInfoText("Animated model test 1.");
+    if (autoFollow)
+    {
+
+
+		char buffer[128];
+		sprintf(buffer, "autoFollow : %f info %f %f", rotateCamAngle, camAngle, _playerRotation * Rad2Deg);
+		TestHelper::Instance()->AddInfoText(buffer);
+    }else
+    {
+
+		char buffer[128];
+		sprintf(buffer, "no autoFollow : %f info %f %f", rotateCamAngle, camAngle, _playerRotation * Rad2Deg);
+		TestHelper::Instance()->AddInfoText(buffer);
+    }
+
 	TestHelper::Instance()->ShowInfoText();
 
 	//end frame

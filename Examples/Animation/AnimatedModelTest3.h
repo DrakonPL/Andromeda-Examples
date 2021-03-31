@@ -37,7 +37,9 @@ private:
     Camera3d* _cam;
 
 	// Shaders
-    Shader* _shader_gpu;
+    Shader* _shaderTexture;
+    Shader* _shaderColor;
+    Shader* _shaderStatic;
 
 	//texture
 	Texture* _texture;
@@ -61,6 +63,7 @@ private:
 	MouseDevice* _mouse;
 
 	AnimatedModel* _animatedModel;
+	AnimatedModel* _swordModel;
 	std::string _currentAnimation;
 
 	//player data
@@ -85,6 +88,21 @@ private:
 	OrbitCam* _orbitCam;
 
 	//auto follow
+	bool autoFollow;
+	float followTimer;
+
+	float targetAngle = 0;
+	float camAngle = 0;
+	float testAngle = 0;
+	float rotateCamAngle = 0;
+
+
+	//animations
+	bool anyAnimation = false;
+	float animationTime = 0.0f;
+
+	bool jump = false;
+	float jumpTime = 0.0f;
 
 public:
 

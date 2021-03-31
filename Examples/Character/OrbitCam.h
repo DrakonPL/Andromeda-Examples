@@ -22,6 +22,8 @@ public:
         , m_lookAt(std::move(lookat))
         , m_upVector(std::move(upVector))
     {
+        xAngle = 0.0f;
+        yAngle = 0.0f;
         UpdateViewMatrix();
     }
 
@@ -44,6 +46,10 @@ public:
     // Camera forward is -z
     glm::vec3 GetViewDir() const { return -glm::transpose(m_viewMatrix)[2]; }
     glm::vec3 GetRightVector() const { return glm::transpose(m_viewMatrix)[0]; }
+
+    float GetXAngle() { return xAngle; }
+    float GetYAngle() { return yAngle; }
+
 
     void SetCameraView(glm::vec3 eye, glm::vec3 lookat, glm::vec3 up)
     {
@@ -72,8 +78,8 @@ public:
         // step 1 : Calculate the amount of rotation given the mouse movement.
         float deltaAngleX = (2 * M_PI / windowWidth); // a movement from left to right = 2*PI = 360 deg
         float deltaAngleY = (M_PI / windowHeight);  // a movement from top to bottom = PI = 180 deg
-        float xAngle = rotatex * deltaAngleX;
-        float yAngle = rotatey * deltaAngleY;
+        xAngle = rotatex * deltaAngleX;
+        yAngle = rotatey * deltaAngleY;
 
         // Extra step to handle the problem when the camera direction is the same as the up vector
         float cosAngle = glm::dot(GetViewDir(), GetUpVector());
@@ -99,6 +105,9 @@ private:
     glm::vec3 m_eye; // Camera position in 3D
     glm::vec3 m_lookAt; // Point that the camera is looking at
     glm::vec3 m_upVector; // Orientation of the camera
+
+    float xAngle;
+    float yAngle;
 };
 
 #endif
