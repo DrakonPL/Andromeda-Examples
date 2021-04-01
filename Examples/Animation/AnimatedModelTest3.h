@@ -33,9 +33,6 @@ private:
 	//texture manager
 	TextureManager* _textureManager;
 
-	//cam
-    Camera3d* _cam;
-
 	// Shaders
     Shader* _shaderTexture;
     Shader* _shaderColor;
@@ -62,8 +59,8 @@ private:
 	GamepadDevice* _gamepad;
 	MouseDevice* _mouse;
 
-	AnimatedModel* _animatedModel;
-	AnimatedModel* _swordModel;
+	AnimatedModel* playerModel;
+	AnimatedModel* itemModel;
 	std::string _currentAnimation;
 
 	//player data
@@ -72,12 +69,6 @@ private:
 	float _playerRotation;
 
 	float _playerSpeed;
-
-	//cam settings
-	float _cameraHeight;
-	float _minCameraDistance;
-	float _maxCameraDistance;
-
 
 	//floor
 	Texture* _floorTexture;

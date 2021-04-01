@@ -26,9 +26,6 @@ void AnimatedModelTest3::Init()
 	_shaderManager = ShaderManager::Instance();
 	_textureManager = TextureManager::Instance();
 
-	//cam
-	_cam = new Camera3d(glm::vec3(0.0f, 2.0f, -3.0f), glm::vec3(0.0f, 1.0f, 0.0f), 90.0f, -10.0f);
-
 	//load shader
 	_shaderTexture = _shaderManager->LoadFromFile("skinned_gpu_texture", "Assets/Shaders/skinned_gpu_texture", "Assets/Shaders/lit_texture", NormalTextureWeighJoint);
 	_shaderColor = _shaderManager->LoadFromFile("skinned_gpu_color", "Assets/Shaders/skinned_gpu_color", "Assets/Shaders/lit_color", NormalTextureWeighJoint);
@@ -66,50 +63,31 @@ void AnimatedModelTest3::Init()
 	//player
 	//std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Nate3.gltf";
 	std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Ducky2.glb";
-
-	_animatedModel = new AnimatedModel();
-	_animatedModel->LoadSkinnedModel(modelFile, SkinningType::GPU);
-	_animatedModel->SetShader(_shaderColor);
+	playerModel = new AnimatedModel();
+	playerModel->LoadSkinnedModel(modelFile, SkinningType::GPU);
+	playerModel->SetShader(_shaderColor);
 
 
 	//load sword asset
-	std::string swordFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Axe.gltf";
-	
-	_swordModel = new AnimatedModel();
-	_swordModel->LoadOnly(swordFile);
-	_swordModel->LoadStaticModelAndConnectBone(swordFile, _animatedModel->GetBoneIndex("armRight"), glm::vec3(-0.383824f, 0.193997f, 0), glm::vec3(-35.0f * Deg2Rad, 0.0, 0));
-	_swordModel->SetShader(_shaderColor);
+	std::string swordFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Axe.gltf";	
+	itemModel = new AnimatedModel();
+	itemModel->LoadOnly(swordFile);
+	itemModel->SetShader(_shaderColor);
 
-
-	_animatedModel->AttachModel(_swordModel, "armRight", glm::vec3(-0.383824f, 0.193997f, 0), glm::vec3(-35.0f * Deg2Rad, 0.0, 0));
-
-	//model = glm::translate(model, glm::vec3(-0.383824f, 0.193997f, 0));
-	//model = glm::rotate(model, -35.0f * Deg2Rad, glm::vec3(1.0f, 0.0f, 0.0f));
-
-	//armRight
-
-	//jak bym chcuia³ ¿eby to dzia³a³o
-	//1 - ³adujê model - chcê za³adowaæ narazie sam mesh ale z okreœleniem ¿e nie jest to static mesh tylko bêdzie pod³¹czony do kosci
-	//2 - dodajê do animowanego modelu okreœlone lub wszystkie meshe z modelu oraz ustawiam nazwê koœci do ktorej ma byæ przypiêty mesh
-	//j
-
+	//attach item model to player model bone
+	playerModel->AttachModel(itemModel, "armRight", glm::vec3(-0.383824f, 0.193997f, 0), glm::vec3(-35.0f * Deg2Rad, 0.0, 0));
 
 	_currentAnimation = "Idle";
-	_animatedModel->SetCurrentClip(_currentAnimation);
+	playerModel->SetCurrentClip(_currentAnimation);
 
 	_playerPosition = glm::vec3(0.0f,0.0f,0.0f);
 	_playerSpeed = 4.0f;
-
-	//cam settings
-	_cameraHeight = 3.0f;
-	_minCameraDistance = 2.5f;
-	_maxCameraDistance = 3.0f;
 
 	_orbitCam = new OrbitCam(glm::vec3(0.0f, 2.0f, -3.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	//floor
 	_floorShader = _shaderManager->LoadFromFile("floorShader", "Assets/Shaders/vertex_color_texture_transform_3d", "Assets/Shaders/vertex_color_texture", TextureColor);
-	_floorTexture = _textureManager->LoadFromFile("Assets/Images/texture_01.png", Andromeda::Graphics::TextureFilerType::LinearFilter, Andromeda::Graphics::TextureColorType::Texture_RGBA, Andromeda::Graphics::TextureWrapType::Repeat, 7);
+	_floorTexture = _textureManager->LoadFromFile("Assets/Images/wood.png", Andromeda::Graphics::TextureFilerType::LinearFilter, Andromeda::Graphics::TextureColorType::Texture_RGBA, Andromeda::Graphics::TextureWrapType::Repeat, 7);
 
 	//create floor model
 	{
@@ -172,7 +150,6 @@ void AnimatedModelTest3::Enter()
 
 void AnimatedModelTest3::CleanUp()
 {
-	delete _cam;
 	delete _timer;
 }
 
@@ -195,12 +172,6 @@ void AnimatedModelTest3::GameResume()
 {
 
 }
-
-
-
-
-
-
 
 void AnimatedModelTest3::HandleEvents(GameManager* manager)
 {
@@ -273,7 +244,7 @@ void AnimatedModelTest3::HandleEvents(GameManager* manager)
 			if (_currentAnimation != "Run")
 			{
 				_currentAnimation = "Run";
-				_animatedModel->FadeToClip(_currentAnimation, 0.3f);
+				playerModel->FadeToClip(_currentAnimation, 0.3f);
 			}
 		}
 
@@ -284,13 +255,13 @@ void AnimatedModelTest3::HandleEvents(GameManager* manager)
 				_currentAnimation = "Jump";
 
 				//get jump time
-				jumpTime = _animatedModel->GetClipDuration(_currentAnimation);
+				jumpTime = playerModel->GetClipDuration(_currentAnimation);
 
 				//set jump variable
 				jump = true;
 
 				//play animation
-				_animatedModel->PlayOnce(_currentAnimation);
+				playerModel->PlayOnce(_currentAnimation);
 			}
 
 			//set animation info
@@ -306,13 +277,10 @@ void AnimatedModelTest3::HandleEvents(GameManager* manager)
 			if (_currentAnimation != "Idle")
 			{
 				_currentAnimation = "Idle";
-				_animatedModel->FadeToClip(_currentAnimation, 0.3f);
+				playerModel->FadeToClip(_currentAnimation, 0.3f);
 			}
-		}
-
-		
+		}		
 	}
-
 
 	if (InputHelper::Instance()->ActionPressed(InputAction::Next))
 	{
@@ -332,13 +300,8 @@ void AnimatedModelTest3::Update(GameManager* manager)
 	_dt = _timer->GetDelta();
 
 	//update model
-	_animatedModel->Update(_dt);
+	playerModel->Update(_dt);
 
-	//get palette matrix
-	_swordModel->SetPosePalette(_animatedModel->GetPosePalette());
-	_swordModel->SetInvBindPose(_animatedModel->GetInvBindPose());
-
-	//
 
 	if( jump)
 	{
@@ -413,7 +376,7 @@ void AnimatedModelTest3::Draw(GameManager* manager)
 		_floorModel->Draw();
 	}
 
-	glm::mat4 playerModel{ 1.0f };
+	glm::mat4 playerLocation{ 1.0f };
 	//draw player
 	{
 		//use texture
@@ -426,25 +389,25 @@ void AnimatedModelTest3::Draw(GameManager* manager)
 		glm::mat4 mvp{ 1.0f };
 		glm::vec3 lit(1, 1, 1);
 
-		playerModel = glm::translate(playerModel, _playerPosition);
-		playerModel = glm::rotate(playerModel, _playerRotation, glm::vec3(0.0f, 1.0f, 0.0f));
+		playerLocation = glm::translate(playerLocation, _playerPosition);
+		playerLocation = glm::rotate(playerLocation, _playerRotation, glm::vec3(0.0f, 1.0f, 0.0f));
 
 		//get view matrix from camera
 		//view = _cam->GetViewMatrix();
-		mvp = _projection * camView * playerModel;
+		mvp = _projection * camView * playerLocation;
 
 		glm::vec3 viewPosition = _orbitCam->GetEye() + glm::vec3(_playerPosition.x, 0, _playerPosition.z);
 		glm::vec3 lampPosition = glm::vec3(0.0f, 5.0f, 5.0f);
 
 
-		_shaderColor->SetUniform(VertexShader, "model", playerModel);
+		_shaderColor->SetUniform(VertexShader, "model", playerLocation);
 		_shaderColor->SetUniform(VertexShader, "mvp", mvp);
 
 		_shaderColor->SetUniform(FragmentShader, "viewPos", viewPosition);
 		_shaderColor->SetUniform(FragmentShader, "light", lampPosition);
 
 
-		_animatedModel->Draw();
+		playerModel->Draw();
 	}
 
 
@@ -458,18 +421,8 @@ void AnimatedModelTest3::Draw(GameManager* manager)
 		glm::mat4 mvp{ 1.0f };
 		glm::vec3 lit(1, 1, 1);
 
-		//-0.383824 m
-		//0.193997 m
 
-		//model = glm::translate(model, glm::vec3(-0.383824f, 0.193997f, 0));
-		//model = glm::rotate(model, -35.0f * Deg2Rad, glm::vec3(1.0f, 0.0f, 0.0f));
-		//model = glm::rotate(model, 90.0f * Deg2Rad, glm::vec3(0.0f, 0.0f, 1.0f));
-		//model = glm::rotate(model, 90.0f * Deg2Rad, glm::vec3(0.0f, 1.0f, 0.0f));
-
-		model = playerModel * model;
-		//model = glm::rotate(model, _playerRotation, glm::vec3(0.0f, 1.0f, 0.0f));
-		//model = glm::rotate(model, 180.1f * Deg2Rad, glm::vec3(1.0f, 0.0f, 0.0f));
-		//model = glm::rotate(model, 90.0f * Deg2Rad, glm::vec3(0.0f, 0.0f, 1.0f));
+		model = playerLocation * model;
 
 		//get view matrix from camera
 		//view = _cam->GetViewMatrix();
@@ -484,7 +437,7 @@ void AnimatedModelTest3::Draw(GameManager* manager)
 		_shaderColor->SetUniform(FragmentShader, "viewPos", viewPosition);
 		_shaderColor->SetUniform(FragmentShader, "light", lampPosition);
 
-		_swordModel->Draw();
+		itemModel->Draw();
 	}
 
 
