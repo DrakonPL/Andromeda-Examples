@@ -110,9 +110,6 @@
     <ClCompile Include="..\..\..\Examples\Lightening\TestLight4.cpp">
       <Filter>Source Files\Lightening</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Examples\Models\TestMd5Model.cpp">
-      <Filter>Source Files\Models</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Examples\Models\TestObjKart.cpp">
       <Filter>Source Files\Models</Filter>
     </ClCompile>
@@ -258,9 +255,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Examples\Lightening\TestLight4.h">
       <Filter>Source Files\Lightening</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Examples\Models\TestMd5Model.h">
-      <Filter>Source Files\Models</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Examples\Models\TestObjKart.h">
       <Filter>Source Files\Models</Filter>

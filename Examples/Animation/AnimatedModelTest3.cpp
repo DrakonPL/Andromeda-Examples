@@ -68,8 +68,7 @@ void AnimatedModelTest3::Init()
 	std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Ducky2.glb";
 
 	_animatedModel = new AnimatedModel();
-	_animatedModel->SetSkinningType(SkinningType::GPU);
-	_animatedModel->LoadAnimatedModel(modelFile);
+	_animatedModel->LoadSkinnedModel(modelFile, SkinningType::GPU);
 	_animatedModel->SetShader(_shaderColor);
 
 
@@ -77,10 +76,12 @@ void AnimatedModelTest3::Init()
 	std::string swordFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Models/Gltf/Axe.gltf";
 	
 	_swordModel = new AnimatedModel();
-	_swordModel->SetSkinningType(SkinningType::None);
+	_swordModel->LoadOnly(swordFile);
 	_swordModel->LoadStaticModelAndConnectBone(swordFile, _animatedModel->GetBoneIndex("armRight"), glm::vec3(-0.383824f, 0.193997f, 0), glm::vec3(-35.0f * Deg2Rad, 0.0, 0));
-	//_swordModel->LoadStaticModelAndConnectBone(swordFile, 9);
 	_swordModel->SetShader(_shaderColor);
+
+
+	_animatedModel->AttachModel(_swordModel, "armRight", glm::vec3(-0.383824f, 0.193997f, 0), glm::vec3(-35.0f * Deg2Rad, 0.0, 0));
 
 	//model = glm::translate(model, glm::vec3(-0.383824f, 0.193997f, 0));
 	//model = glm::rotate(model, -35.0f * Deg2Rad, glm::vec3(1.0f, 0.0f, 0.0f));

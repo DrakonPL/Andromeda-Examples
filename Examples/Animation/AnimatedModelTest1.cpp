@@ -49,8 +49,7 @@ void AnimatedModelTest1::Init()
 	std::string modelFile = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + "Assets/Animation/Ducky.gltf";
 
 	_animatedModel = new AnimatedModel();
-	_animatedModel->SetSkinningType(SkinningType::GPU);
-	_animatedModel->LoadAnimatedModel(modelFile);
+	_animatedModel->LoadSkinnedModel(modelFile, SkinningType::GPU);
 	_animatedModel->SetShader(_shader_gpu);
 }
 

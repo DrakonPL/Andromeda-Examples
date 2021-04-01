@@ -59,7 +59,6 @@
     <ClCompile Include="..\..\..\Examples\Lightening\TestLight2.cpp" />
     <ClCompile Include="..\..\..\Examples\Lightening\TestLight3.cpp" />
     <ClCompile Include="..\..\..\Examples\Lightening\TestLight4.cpp" />
-    <ClCompile Include="..\..\..\Examples\Models\TestMd5Model.cpp" />
     <ClCompile Include="..\..\..\Examples\Models\TestObjKart.cpp" />
     <ClCompile Include="..\..\..\Examples\Models\TestObjModel.cpp" />
     <ClCompile Include="..\..\..\Examples\Other\FontTest.cpp" />
@@ -110,7 +109,6 @@
     <ClInclude Include="..\..\..\Examples\Lightening\TestLight2.h" />
     <ClInclude Include="..\..\..\Examples\Lightening\TestLight3.h" />
     <ClInclude Include="..\..\..\Examples\Lightening\TestLight4.h" />
-    <ClInclude Include="..\..\..\Examples\Models\TestMd5Model.h" />
     <ClInclude Include="..\..\..\Examples\Models\TestObjKart.h" />
     <ClInclude Include="..\..\..\Examples\Models\TestObjModel.h" />
     <ClInclude Include="..\..\..\Examples\Other\FontTest.h" />
