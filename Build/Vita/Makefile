@@ -22,12 +22,14 @@ OBJS   = 	../../../Andromeda-Lib/Libs/tinyxml/tinystr.o \
 			../../Examples/Bullet/TestBullet3.o \
 			../../Examples/Bullet/TestBullet4.o \
 			../../Examples/Bullet/BasicCar.o \
+			../../Examples/Bullet/DynamicCharacterController.o \
+			../../Examples/Bullet/BulletCharacterTest.o \
+			../../Examples/Bullet/BulletBallTest.o \
 			../../Examples/Input/TouchTest.o \
 			../../Examples/FreeTypeTests/TestFreeTypeAtlas.o \
 			../../Examples/FreeTypeTests/TestFreeTypeFont.o \
 			../../Examples/Models/TestObjModel.o \
 			../../Examples/Models/TestObjKart.o \
-			../../Examples/Models/TestMd5Model.o \
 			../../Examples/Lightening/TestLight1.o \
 			../../Examples/Lightening/TestLight2.o \
 			../../Examples/Lightening/TestLight3.o \
@@ -35,6 +37,14 @@ OBJS   = 	../../../Andromeda-Lib/Libs/tinyxml/tinystr.o \
 			../../Examples/Animation/TestAnimation2.o \
 			../../Examples/Animation/TestAnimation3.o \
 			../../Examples/Animation/TestAnimation4.o \
+			../../Examples/Animation/TestAnimation5.o \
+			../../Examples/Animation/AnimatedModelTest1.o \
+			../../Examples/Animation/AnimatedModelTest2.o \
+			../../Examples/Animation/AnimatedModelTest3.o \
+			../../Examples/Animation/AnimatedModelTest5.o \
+			../../Examples/Character/CharacterTest1.o \
+			../../Examples/Character/SimpleCharacterController.o \
+			../../Examples/Character/CharacterControllerTest.o \
 			../../Examples/Other/TextureTest.o \
 			../../Examples/Other/ShaderTest.o \
 			../../Examples/Other/VertexArrayTest.o \

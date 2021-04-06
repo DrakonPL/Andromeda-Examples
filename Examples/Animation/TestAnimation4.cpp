@@ -223,6 +223,7 @@ void TestAnimation4::Draw(GameManager* manager)
 	_shader_gpu->SetUniform(VertexShader, "model", model);
 	_shader_gpu->SetUniform(VertexShader, "mvp", mvp);
 	_shader_gpu->SetUniform(FragmentShader, "light", lit);
+
 	_shader_gpu->Set(VertexShader, "pose", mPosePalette);
 	_shader_gpu->Set(VertexShader, "invBindPose", mSkeleton.GetInvBindPose());
 

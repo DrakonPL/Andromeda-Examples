@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef AnimatedModelTest3_H
-#define AnimatedModelTest3_H
+#ifndef AnimatedModelTest5_H
+#define AnimatedModelTest5_H
 
 #include <Andromeda/System/GameState.h>
 #include <Andromeda/System/GameManager.h>
@@ -20,7 +20,7 @@ using namespace Andromeda::System;
 using namespace Andromeda::Input;
 using namespace Andromeda::Graphics;
 
-class AnimatedModelTest3 : public GameState
+class AnimatedModelTest5 : public GameState
 {
 private:
 
@@ -60,7 +60,7 @@ private:
 	MouseDevice* _mouse;
 
 	AnimatedModel* playerModel;
-	//AnimatedModel* itemModel;
+	AnimatedModel* itemModel;
 	std::string _currentAnimation;
 
 	//player data

@@ -42,6 +42,7 @@
 #include "Animation/AnimatedModelTest1.h"
 #include "Animation/AnimatedModelTest2.h"
 #include "Animation/AnimatedModelTest3.h"
+#include "Animation/AnimatedModelTest5.h"
 
 #include "Character/CharacterTest1.h"
 #include "Character/CharacterControllerTest.h"
@@ -63,6 +64,7 @@ TestHelper::TestHelper()
 {
 	_currentTest = 0;
 
+	_tests.push_back(new AnimatedModelTest5());
 	_tests.push_back(new AnimatedModelTest3());
 	_tests.push_back(new AnimatedModelTest1());
 	_tests.push_back(new AnimatedModelTest2());

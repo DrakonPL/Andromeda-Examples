@@ -1,8 +1,7 @@
-#include "AnimatedModelTest3.h"
+#include "AnimatedModelTest5.h"
 
 #include "../TestHelper.h"
 #include "../InputHelper.h"
-#include "Andromeda/FileSystem/FileManager.h"
 #include "Andromeda/Graphics/ShaderManager.h"
 #include "Andromeda/Graphics/VertexTypes.h"
 
@@ -14,8 +13,7 @@
 #include <glm/gtc/matrix_inverse.hpp>
 
 
-
-void AnimatedModelTest3::Init()
+void AnimatedModelTest5::Init()
 {
 	_renderManager = RenderManager::Instance();
 	_shaderManager = ShaderManager::Instance();
@@ -23,7 +21,7 @@ void AnimatedModelTest3::Init()
 
 	//load shader
 	//_shaderTexture = _shaderManager->LoadFromFile("skinned_gpu_texture", "Assets/Shaders/skinned_gpu_texture", "Assets/Shaders/lit_texture", NormalTextureWeighJoint);
-	_shaderColor = _shaderManager->LoadFromFile("skinned_gpu_color", "Assets/Shaders/skinned_gpu_color", "Assets/Shaders/lit_color", NormalTextureWeighJoint);
+	_shaderColor = _shaderManager->LoadFromFile("skinned_gpu_color", "Assets/Shaders/skinned_gpu_color_test", "Assets/Shaders/lit_color_test", NormalTextureWeighJoint);
 	// /_shaderStatic = _shaderManager->LoadFromFile("static_color", "Assets/Shaders/static_color", "Assets/Shaders/lit_color", TextureNormal);
 
 
@@ -64,13 +62,13 @@ void AnimatedModelTest3::Init()
 
 
 	//load sword asset
-	//std::string swordFile = "Assets/Models/Gltf/Axe.gltf";	
-	//itemModel = new AnimatedModel();
-	//itemModel->LoadOnly(swordFile);
-	//itemModel->SetShader(_shaderColor);
+	std::string swordFile = "Assets/Models/Gltf/Axe.gltf";	
+	itemModel = new AnimatedModel();
+	itemModel->LoadOnly(swordFile);
+	itemModel->SetShader(_shaderColor);
 
 	//attach item model to player model bone
-	//playerModel->AttachModel(itemModel, "armRight", glm::vec3(-0.383824f, 0.193997f, 0), glm::vec3(-35.0f * Deg2Rad, 0.0, 0));
+	playerModel->AttachModel(itemModel, "armRight", glm::vec3(-0.383824f, 0.193997f, 0), glm::vec3(-35.0f * Andromeda::Math::Math::Deg2Rad, 0.0, 0));
 
 	_currentAnimation = "Idle";
 	playerModel->SetCurrentClip(_currentAnimation);
@@ -138,37 +136,37 @@ void AnimatedModelTest3::Init()
 	followTimer = 0.0f;
 }
 
-void AnimatedModelTest3::Enter()
+void AnimatedModelTest5::Enter()
 {
 
 }
 
-void AnimatedModelTest3::CleanUp()
+void AnimatedModelTest5::CleanUp()
 {
 	delete _timer;
 }
 
-void AnimatedModelTest3::Pause()
+void AnimatedModelTest5::Pause()
 {
 
 }
 
-void AnimatedModelTest3::Resume()
+void AnimatedModelTest5::Resume()
 {
 
 }
 
-void AnimatedModelTest3::GamePause()
+void AnimatedModelTest5::GamePause()
 {
 
 }
 
-void AnimatedModelTest3::GameResume()
+void AnimatedModelTest5::GameResume()
 {
 
 }
 
-void AnimatedModelTest3::HandleEvents(GameManager* manager)
+void AnimatedModelTest5::HandleEvents(GameManager* manager)
 {
 	float rutnSmoothTime = 0.1f;
 
@@ -290,7 +288,7 @@ void AnimatedModelTest3::HandleEvents(GameManager* manager)
 	InputHelper::Instance()->Update();
 }
 
-void AnimatedModelTest3::Update(GameManager* manager)
+void AnimatedModelTest5::Update(GameManager* manager)
 {
 	_dt = _timer->GetDelta();
 
@@ -336,7 +334,7 @@ void AnimatedModelTest3::Update(GameManager* manager)
     }
 }
 
-void AnimatedModelTest3::Draw(GameManager* manager)
+void AnimatedModelTest5::Draw(GameManager* manager)
 {
 	//start frame
 	_renderManager->StartFrame();
@@ -394,7 +392,7 @@ void AnimatedModelTest3::Draw(GameManager* manager)
 		glm::vec3 viewPosition = _orbitCam->GetEye() + glm::vec3(_playerPosition.x, 0, _playerPosition.z);
 		glm::vec3 lampPosition = glm::vec3(0.0f, 5.0f, 5.0f);
 
-		//glm::mat3 modelInverse = glm::inverseTranspose(glm::mat3(playerLocation));
+		glm::mat4 modelInverse = glm::inverseTranspose(playerLocation);
 
 
 		_shaderColor->SetUniform(VertexShader, "model", playerLocation);
@@ -410,52 +408,38 @@ void AnimatedModelTest3::Draw(GameManager* manager)
 
 
 	//draw sword
-	//{
-	//	//use shader
-	//	_shaderColor->Bind();
+	{
+		//use shader
+		_shaderColor->Bind();
 
-	//	glm::mat4 model{ 1.0f };
-	//	//glm::mat4 view{ 1.0f };
-	//	glm::mat4 mvp{ 1.0f };
-	//	glm::vec3 lit(1, 1, 1);
+		glm::mat4 model{ 1.0f };
+		//glm::mat4 view{ 1.0f };
+		glm::mat4 mvp{ 1.0f };
+		glm::vec3 lit(1, 1, 1);
 
 
-	//	model = playerLocation * model;
+		model = playerLocation * model;
 
-	//	//get view matrix from camera
-	//	//view = _cam->GetViewMatrix();
-	//	mvp = _projection * camView * model;
+		//get view matrix from camera
+		//view = _cam->GetViewMatrix();
+		mvp = _projection * camView * model;
 
-	//	glm::vec3 viewPosition = _orbitCam->GetEye() + glm::vec3(_playerPosition.x, 0, _playerPosition.z);
-	//	glm::vec3 lampPosition = glm::vec3(0.0f, 5.0f, 5.0f);
+		glm::vec3 viewPosition = _orbitCam->GetEye() + glm::vec3(_playerPosition.x, 0, _playerPosition.z);
+		glm::vec3 lampPosition = glm::vec3(0.0f, 5.0f, 5.0f);
 
-	//	_shaderColor->SetUniform(VertexShader, "model", model);
-	//	_shaderColor->SetUniform(VertexShader, "mvp", mvp);
+		_shaderColor->SetUniform(VertexShader, "model", model);
+		_shaderColor->SetUniform(VertexShader, "mvp", mvp);
 
-	//	_shaderColor->SetUniform(FragmentShader, "viewPos", viewPosition);
-	//	_shaderColor->SetUniform(FragmentShader, "light", lampPosition);
+		_shaderColor->SetUniform(FragmentShader, "viewPos", viewPosition);
+		_shaderColor->SetUniform(FragmentShader, "light", lampPosition);
 
-	//	itemModel->Draw();
-	//}
+		itemModel->Draw();
+	}
 
 
 
 	//draw test info
-    if (autoFollow)
-    {
-
-
-		char buffer[128];
-		sprintf(buffer, "autoFollow : %f info %f %f", rotateCamAngle, camAngle, _playerRotation * Andromeda::Math::Math::Rad2Deg);
-		TestHelper::Instance()->AddInfoText(buffer);
-    }else
-    {
-
-		char buffer[128];
-		sprintf(buffer, "no autoFollow : %f info %f %f", rotateCamAngle, camAngle, _playerRotation * Andromeda::Math::Math::Rad2Deg);
-		TestHelper::Instance()->AddInfoText(buffer);
-    }
-
+	TestHelper::Instance()->AddInfoText("Ducky test");
 	TestHelper::Instance()->ShowInfoText();
 
 	//end frame
