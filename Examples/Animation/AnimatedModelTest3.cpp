@@ -443,14 +443,11 @@ void AnimatedModelTest3::Draw(GameManager* manager)
 	//draw test info
     if (autoFollow)
     {
-
-
 		char buffer[128];
 		sprintf(buffer, "autoFollow : %f info %f %f", rotateCamAngle, camAngle, _playerRotation * Andromeda::Math::Math::Rad2Deg);
 		TestHelper::Instance()->AddInfoText(buffer);
     }else
     {
-
 		char buffer[128];
 		sprintf(buffer, "no autoFollow : %f info %f %f", rotateCamAngle, camAngle, _playerRotation * Andromeda::Math::Math::Rad2Deg);
 		TestHelper::Instance()->AddInfoText(buffer);

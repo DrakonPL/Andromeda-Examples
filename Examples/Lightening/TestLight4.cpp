@@ -83,8 +83,10 @@ void TestLight4::CleanUp()
 	delete _cam;
 	delete _timer;
 
-	_textureManager->RemoveAll();
-	_shaderManager->RemoveAll();
+	_shaderManager->Remove(_shader);
+	_shaderManager->Remove(_lampShader);
+
+	_textureManager->Remove(_cubeTexture);
 }
 
 void TestLight4::Pause()

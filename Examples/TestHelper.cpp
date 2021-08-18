@@ -19,17 +19,13 @@
 #include "Models/TestObjModel.h"
 #include "Models/TestObjKart.h"
 
-////#include "Models/TestMd5Model.h"
-//
 #include "Bullet/TestBullet1.h"
 #include "Bullet/TestBullet2.h"
 #include "Bullet/TestBullet3.h"
 #include "Bullet/TestBullet4.h"
 #include "Bullet/BulletBallTest.h"
 #include "Bullet/BulletCharacterTest.h"
-//
 
-//
 #include "Lightening/TestLight1.h"
 #include "Lightening/TestLight2.h"
 #include "Lightening/TestLight3.h"
@@ -42,10 +38,12 @@
 #include "Animation/AnimatedModelTest1.h"
 #include "Animation/AnimatedModelTest2.h"
 #include "Animation/AnimatedModelTest3.h"
-#include "Animation/AnimatedModelTest5.h"
+#include "Animation/AnimatedModelTest4.h"
 
 #include "Character/CharacterTest1.h"
 #include "Character/CharacterControllerTest.h"
+#include "FreeTypeTests/TestFreeTypeFont.h"
+#include "Lightening/TestLight4.h"
 
 
 TestHelper* TestHelper::_testHelper = NULL;
@@ -63,26 +61,6 @@ TestHelper* TestHelper::Instance()
 TestHelper::TestHelper()
 {
 	_currentTest = 0;
-
-	_tests.push_back(new AnimatedModelTest5());
-	_tests.push_back(new AnimatedModelTest3());
-	_tests.push_back(new AnimatedModelTest1());
-	_tests.push_back(new AnimatedModelTest2());
-
-
-
-	_tests.push_back(new TestAnimation1());
-	_tests.push_back(new TestAnimation2());
-	_tests.push_back(new TestAnimation3());
-	_tests.push_back(new TestAnimation4());
-	_tests.push_back(new TestAnimation5());
-
-	_tests.push_back(new CharacterTest1());
-
-	_tests.push_back(new BulletCharacterTest());
-	_tests.push_back(new BulletBallTest());
-
-
 
 	_tests.push_back(new Test1());
 	_tests.push_back(new Test2());
@@ -106,14 +84,28 @@ TestHelper::TestHelper()
 	_tests.push_back(new TestLight1());
 	_tests.push_back(new TestLight2());
 	_tests.push_back(new TestLight3());
-	//_tests.push_back(new TestLight4());
+	_tests.push_back(new TestLight4());
+
+	_tests.push_back(new TestAnimation1());
+	_tests.push_back(new TestAnimation2());
+	_tests.push_back(new TestAnimation3());
+	_tests.push_back(new TestAnimation4());
+
+	_tests.push_back(new AnimatedModelTest1());
+	_tests.push_back(new AnimatedModelTest2());
+	_tests.push_back(new AnimatedModelTest3());
+	_tests.push_back(new AnimatedModelTest4());
 
 	_tests.push_back(new TestBullet1());
 	_tests.push_back(new TestBullet2());
 	_tests.push_back(new TestBullet3());
 	_tests.push_back(new TestBullet4());
 
-
+	//others
+    //_tests.push_back(new TestAnimation5());
+    //_tests.push_back(new CharacterTest1());
+    //_tests.push_back(new BulletCharacterTest());
+    //_tests.push_back(new BulletBallTest());
 
 	//memory tests
 	//_tests.push_back(new ShaderTest());

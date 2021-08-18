@@ -24,7 +24,7 @@
     <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest1.cpp" />
     <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest2.cpp" />
     <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest3.cpp" />
-    <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest5.cpp" />
+    <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest4.cpp" />
     <ClCompile Include="..\..\..\Examples\Animation\TestAnimation1.cpp" />
     <ClCompile Include="..\..\..\Examples\Animation\TestAnimation2.cpp" />
     <ClCompile Include="..\..\..\Examples\Animation\TestAnimation3.cpp" />
@@ -74,7 +74,7 @@
     <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest1.h" />
     <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest2.h" />
     <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest3.h" />
-    <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest5.h" />
+    <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest4.h" />
     <ClInclude Include="..\..\..\Examples\Animation\TestAnimation1.h" />
     <ClInclude Include="..\..\..\Examples\Animation\TestAnimation2.h" />
     <ClInclude Include="..\..\..\Examples\Animation\TestAnimation3.h" />

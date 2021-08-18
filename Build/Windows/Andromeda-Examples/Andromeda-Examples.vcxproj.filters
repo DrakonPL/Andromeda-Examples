@@ -185,7 +185,7 @@
     <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest3.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest5.cpp">
+    <ClCompile Include="..\..\..\Examples\Animation\AnimatedModelTest4.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
   </ItemGroup>
@@ -334,7 +334,7 @@
     <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest3.h">
       <Filter>Source Files\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest5.h">
+    <ClInclude Include="..\..\..\Examples\Animation\AnimatedModelTest4.h">
       <Filter>Source Files\Animation</Filter>
     </ClInclude>
   </ItemGroup>

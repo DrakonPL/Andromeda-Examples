@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef AnimatedModelTest5_H
-#define AnimatedModelTest5_H
+#ifndef AnimatedModelTest4_H
+#define AnimatedModelTest4_H
 
 #include <Andromeda/System/GameState.h>
 #include <Andromeda/System/GameManager.h>
@@ -20,7 +20,7 @@ using namespace Andromeda::System;
 using namespace Andromeda::Input;
 using namespace Andromeda::Graphics;
 
-class AnimatedModelTest5 : public GameState
+class AnimatedModelTest4 : public GameState
 {
 private:
 

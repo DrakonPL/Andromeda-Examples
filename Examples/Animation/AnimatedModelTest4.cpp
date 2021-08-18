@@ -1,4 +1,4 @@
-#include "AnimatedModelTest5.h"
+#include "AnimatedModelTest4.h"
 
 #include "../TestHelper.h"
 #include "../InputHelper.h"
@@ -13,7 +13,7 @@
 #include <glm/gtc/matrix_inverse.hpp>
 
 
-void AnimatedModelTest5::Init()
+void AnimatedModelTest4::Init()
 {
 	_renderManager = RenderManager::Instance();
 	_shaderManager = ShaderManager::Instance();
@@ -21,7 +21,7 @@ void AnimatedModelTest5::Init()
 
 	//load shader
 	//_shaderTexture = _shaderManager->LoadFromFile("skinned_gpu_texture", "Assets/Shaders/skinned_gpu_texture", "Assets/Shaders/lit_texture", NormalTextureWeighJoint);
-	_shaderColor = _shaderManager->LoadFromFile("skinned_gpu_color", "Assets/Shaders/skinned_gpu_color_test", "Assets/Shaders/lit_color_test", NormalTextureWeighJoint);
+	_shaderColor = _shaderManager->LoadFromFile("skinned_gpu_color", "Assets/Shaders/skinned_gpu_color", "Assets/Shaders/lit_color", NormalTextureWeighJoint);
 	// /_shaderStatic = _shaderManager->LoadFromFile("static_color", "Assets/Shaders/static_color", "Assets/Shaders/lit_color", TextureNormal);
 
 
@@ -136,37 +136,37 @@ void AnimatedModelTest5::Init()
 	followTimer = 0.0f;
 }
 
-void AnimatedModelTest5::Enter()
+void AnimatedModelTest4::Enter()
 {
 
 }
 
-void AnimatedModelTest5::CleanUp()
+void AnimatedModelTest4::CleanUp()
 {
 	delete _timer;
 }
 
-void AnimatedModelTest5::Pause()
+void AnimatedModelTest4::Pause()
 {
 
 }
 
-void AnimatedModelTest5::Resume()
+void AnimatedModelTest4::Resume()
 {
 
 }
 
-void AnimatedModelTest5::GamePause()
+void AnimatedModelTest4::GamePause()
 {
 
 }
 
-void AnimatedModelTest5::GameResume()
+void AnimatedModelTest4::GameResume()
 {
 
 }
 
-void AnimatedModelTest5::HandleEvents(GameManager* manager)
+void AnimatedModelTest4::HandleEvents(GameManager* manager)
 {
 	float rutnSmoothTime = 0.1f;
 
@@ -288,7 +288,7 @@ void AnimatedModelTest5::HandleEvents(GameManager* manager)
 	InputHelper::Instance()->Update();
 }
 
-void AnimatedModelTest5::Update(GameManager* manager)
+void AnimatedModelTest4::Update(GameManager* manager)
 {
 	_dt = _timer->GetDelta();
 
@@ -334,7 +334,7 @@ void AnimatedModelTest5::Update(GameManager* manager)
     }
 }
 
-void AnimatedModelTest5::Draw(GameManager* manager)
+void AnimatedModelTest4::Draw(GameManager* manager)
 {
 	//start frame
 	_renderManager->StartFrame();
@@ -402,7 +402,6 @@ void AnimatedModelTest5::Draw(GameManager* manager)
 		_shaderColor->SetUniform(FragmentShader, "viewPos", viewPosition);
 		_shaderColor->SetUniform(FragmentShader, "light", lampPosition);
 
-
 		playerModel->Draw();
 	}
 
@@ -413,15 +412,9 @@ void AnimatedModelTest5::Draw(GameManager* manager)
 		_shaderColor->Bind();
 
 		glm::mat4 model{ 1.0f };
-		//glm::mat4 view{ 1.0f };
 		glm::mat4 mvp{ 1.0f };
-		glm::vec3 lit(1, 1, 1);
-
 
 		model = playerLocation * model;
-
-		//get view matrix from camera
-		//view = _cam->GetViewMatrix();
 		mvp = _projection * camView * model;
 
 		glm::vec3 viewPosition = _orbitCam->GetEye() + glm::vec3(_playerPosition.x, 0, _playerPosition.z);
@@ -435,8 +428,6 @@ void AnimatedModelTest5::Draw(GameManager* manager)
 
 		itemModel->Draw();
 	}
-
-
 
 	//draw test info
 	TestHelper::Instance()->AddInfoText("Ducky test");

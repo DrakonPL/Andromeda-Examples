@@ -221,30 +221,15 @@ void TestAnimation5::Draw(GameManager* manager)
 	mvp = _projection * view * model;
 
 	glm::vec3 viewPosition = _cam->Position;
-
-
-	glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	glm::vec3 lampPosition = glm::vec3(0.0f, 5.0f, 5.0f);
-	glm::vec3 diffuseColor = lightColor * glm::vec3(0.7f); // decrease the influence
-	glm::vec3 ambientColor = diffuseColor * glm::vec3(0.3f); // low influence
-	glm::vec3 lispecular = glm::vec3(1.0f, 1.0f, 1.0f); 
-
-	glm::vec3 matambient = glm::vec3(0.3f, 0.3f, 0.3f);
-	glm::vec3 matspecular = glm::vec3(0.5f, 0.5f, 0.5f); 
-
 
 	_shader_gpu->SetUniform(VertexShader, "model", model);
 	_shader_gpu->SetUniform(VertexShader, "mvp", mvp);
+
 	_shader_gpu->Set(VertexShader, "pose", mPosePalette);
 	_shader_gpu->Set(VertexShader, "invBindPose", mSkeleton.GetInvBindPose());
 
-	//_shader_gpu->SetUniform(FragmentShader, "liposition", lampPosition);
 	_shader_gpu->SetUniform(FragmentShader, "viewPos", viewPosition);
-
-	//_shader_gpu->SetUniform(FragmentShader, "liambient", ambientColor);
-	//_shader_gpu->SetUniform(FragmentShader, "lidiffuse", diffuseColor);
-	//_shader_gpu->SetUniform(FragmentShader, "lispecular", lispecular);
-
 	_shader_gpu->SetUniform(FragmentShader, "light", lampPosition);
 
 
@@ -253,12 +238,6 @@ void TestAnimation5::Draw(GameManager* manager)
 		glm::vec3 myColor = mMeshes[i].GetMaterial()->GetColor(MaterialColorDiffuse);
 
 		_shader_gpu->SetUniform(FragmentShader, "myColor", myColor);
-
-		// material properties
-		//_shader_gpu->SetUniform(FragmentShader, "matambient", matambient);
-		//_shader_gpu->SetUniform(FragmentShader, "matdiffuse", myColor);
-		//_shader_gpu->SetUniform(FragmentShader, "matspecular", matspecular); // specular lighting doesn't have full effect on this object's material
-		//_shader_gpu->SetUniform(FragmentShader, "matshininess", 32.0f);
 
 		mMeshes[i].Draw();
 	}
