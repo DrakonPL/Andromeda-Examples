@@ -128,6 +128,16 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
 
+<br />
+<p align="center">
+  <a href="https://github.com/DrakonPL/Andromeda-Examples/blob/master/Examples/Basic/Test1.cpp">
+    <img src="Images/1.jpg" alt="1" width="514" height="347">
+  </a>
+
+  <h3 align="center">Andromeda Examples</h3>
+
+</p>
+
 
 
 <!-- CONTRIBUTING -->
