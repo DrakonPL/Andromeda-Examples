@@ -62,7 +62,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#examples">Examples</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -123,8 +123,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 
 
-<!-- ROADMAP -->
-## Roadmap
+<!-- EXAMPLES -->
+## Examples
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
 
@@ -183,27 +183,3 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [license-shield]: https://img.shields.io/github/license/DrakonPL/repo.svg?style=for-the-badge
 [license-url]: https://github.com/DrakonPL/Andromeda-Examples/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-
-
-
-
-# Andromeda-Lib
-
-
-
-
-Building:
-
-
-Windows:
-
-1. Install Visual Studio 2019
-2. Open Build/Windows/Andromeda.sln
-3. Hit "Build" button and wait some time.
-
-Vita:
-
-1. Install newest VitaSDK using https://github.com/vitasdk/vdpm  
-2. Go to Build/Vita
-3. Run "make -jn"  (where n is numer of cores of your cpu)  
-
