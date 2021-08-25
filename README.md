@@ -1,4 +1,3 @@
-# Andromeda-Examples
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -21,35 +20,25 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/DrakonPL/Andromeda-Lib">
+    <img src="Images/andromeda.jpg" alt="Logo" width="514" height="347">
   </a>
 
-  <h3 align="center">project_title</h3>
+  <h3 align="center">Andromeda Examples</h3>
 
   <p align="center">
-    project_description
-    <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    Source code of examples on how to use my cross platform library.
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/DrakonPL/Andromeda-Lib">View Lib</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/DrakonPL/Andromeda-Examples/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/DrakonPL/Andromeda-Examples/issues">Request Feature</a>
   </p>
 </p>
 
@@ -85,8 +74,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Here's a blank template to get started:
 **To avoid retyping too much info. Do a search and replace with your text editor for the following:**
@@ -196,4 +183,27 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [license-shield]: https://img.shields.io/github/license/DrakonPL/repo.svg?style=for-the-badge
 [license-url]: https://github.com/DrakonPL/Andromeda-Examples/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+
+
+
+
+# Andromeda-Lib
+
+
+
+
+Building:
+
+
+Windows:
+
+1. Install Visual Studio 2019
+2. Open Build/Windows/Andromeda.sln
+3. Hit "Build" button and wait some time.
+
+Vita:
+
+1. Install newest VitaSDK using https://github.com/vitasdk/vdpm  
+2. Go to Build/Vita
+3. Run "make -jn"  (where n is numer of cores of your cpu)  
 
